@@ -1,0 +1,19 @@
+package turismoreceptivo.web.repository;
+
+import java.util.Date;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+import turismoreceptivo.web.entity.Usuario;
+
+@Repository
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
+	@Modifying
+    @Query("UPDATE Usuario u SET u.nombre = :nombre, u.apellido = :apellido, u.email = :email, u.telefono = :telefono, u.telefono2 = :telefono2"
+			+ "u.alojamiento = :alojamiento, u.fechaNacimiento = :fechaNacimiento WHERE e.dni = :dni")
+    void modificar(@Param("dni") Integer dni, @Param("nombre") String nombre, @Param("apellido") String apellido, 
+			@Param("email") String email, @Param("telefono") String telefono, @Param("telefono2") String telefono2,
+			@Param("alojamiento") String alojamiento, @Param("fechaNacimiento") Date fechaNacimientoa);
+}
