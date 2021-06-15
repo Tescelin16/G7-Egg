@@ -15,5 +15,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 			+ "u.alojamiento = :alojamiento, u.fechaNacimiento = :fechaNacimiento WHERE e.dni = :dni")
     void modificar(@Param("dni") Integer dni, @Param("nombre") String nombre, @Param("apellido") String apellido, 
 			@Param("email") String email, @Param("telefono") String telefono, @Param("telefono2") String telefono2,
-			@Param("alojamiento") String alojamiento, @Param("fechaNacimiento") Date fechaNacimientoa);
+			@Param("alojamiento") String alojamiento, @Param("fechaNacimiento") Date fechaNacimiento);
 }
