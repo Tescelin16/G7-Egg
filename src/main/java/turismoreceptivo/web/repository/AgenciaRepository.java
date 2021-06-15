@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 import turismoreceptivo.web.entity.Agencia;
 
 @Repository
-public interface AgenciaRepository extends JpaRepository<Agencia, Integer>{
-	
-	@Modifying
+public interface AgenciaRepository extends JpaRepository<Agencia, Integer> {
+
+    @Modifying
     @Query("UPDATE Agencia a SET a.nombre = :nombre, a.telefono = :telefono, a.email = :email, a.direccion = :direccion WHERE a.legajo = :legajo")
-    void modificar(@Param("legajo") Integer legajo, @Param("nombre") String nombre, @Param("telefono") String telefono, 
-			@Param("direccion") String direccion, @Param("email") String email);
+    void modificar(@Param("legajo") Integer legajo, @Param("nombre") String nombre, @Param("telefono") String telefono,
+            @Param("direccion") String direccion, @Param("email") String email);
 }

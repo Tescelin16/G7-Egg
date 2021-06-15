@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 import turismoreceptivo.web.entity.Pasajero;
 
 @Repository
-public interface PasajeroRepository extends JpaRepository<Pasajero, Integer>{
-	
-	@Modifying
+public interface PasajeroRepository extends JpaRepository<Pasajero, Integer> {
+
+    @Modifying
     @Query("UPDATE Pasajero p SET p.nombre = :nombre, p.apellido = :apellido, p.telefono = :telefono WHERE p.dni = :dni")
-    void modificar(@Param("dni") Integer dni, @Param("nombre") String nombre, @Param("apellido") String apellido, 
-			@Param("telefono") String telefono);
+    void modificar(@Param("dni") Integer dni, @Param("nombre") String nombre, @Param("apellido") String apellido,
+            @Param("telefono") String telefono);
 }
