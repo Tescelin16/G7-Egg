@@ -3,7 +3,7 @@ package turismoreceptivo.web.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import turismoreceptivo.web.entity.Agencia;
@@ -38,7 +38,7 @@ public class ReservasService {
         rr.modificar(id, personas, fechahorario);
     }
     
-    @Transactional
+    @Transactional (readOnly= true)
     public List<Reserva> listarReservas(){
        return rr.findAll(); 
     }
@@ -48,7 +48,7 @@ public class ReservasService {
         rr.deleteById(id);
     }
     
-    @Transactional
+    @Transactional (readOnly= true)
     public List<Reserva> buscarPorFecha(LocalDateTime fechahorario){
         return rr.buscarPorFecha(fechahorario);
     }
