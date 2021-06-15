@@ -9,11 +9,12 @@ import org.springframework.stereotype.Repository;
 import turismoreceptivo.web.entity.Usuario;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
-	@Modifying
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
+
+    @Modifying
     @Query("UPDATE Usuario u SET u.nombre = :nombre, u.apellido = :apellido, u.email = :email, u.telefono = :telefono, u.telefono2 = :telefono2"
-			+ "u.alojamiento = :alojamiento, u.fechaNacimiento = :fechaNacimiento WHERE e.dni = :dni")
-    void modificar(@Param("dni") Integer dni, @Param("nombre") String nombre, @Param("apellido") String apellido, 
-			@Param("email") String email, @Param("telefono") String telefono, @Param("telefono2") String telefono2,
-			@Param("alojamiento") String alojamiento, @Param("fechaNacimiento") Date fechaNacimiento);
+            + "u.alojamiento = :alojamiento, u.fechaNacimiento = :fechaNacimiento WHERE e.dni = :dni")
+    void modificar(@Param("dni") Integer dni, @Param("nombre") String nombre, @Param("apellido") String apellido,
+            @Param("email") String email, @Param("telefono") String telefono, @Param("telefono2") String telefono2,
+            @Param("alojamiento") String alojamiento, @Param("fechaNacimiento") Date fechaNacimiento);
 }
