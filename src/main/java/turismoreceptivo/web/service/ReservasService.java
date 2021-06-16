@@ -3,6 +3,7 @@ package turismoreceptivo.web.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import turismoreceptivo.web.entity.Pasajero;
 import turismoreceptivo.web.entity.Producto;
 import turismoreceptivo.web.entity.Reserva;
 import turismoreceptivo.web.entity.Usuario;
+import turismoreceptivo.web.error.ErrorService;
 import turismoreceptivo.web.repository.ReservaRepository;
 
 
@@ -44,8 +46,13 @@ public class ReservasService {
     }
     
     @Transactional
-    public void eliminarReserva (String id){
-        rr.deleteById(id);
+    public void eliminarReserva (String id) throws ErrorService{
+        Optional<Reserva> resp=rr.findById(id);
+        if (resp.isPresent()){
+            rr.deleteById(id);
+        }else{
+           throw new ErrorService("La reserva no fue encontrada");
+        }
     }
     
     @Transactional (readOnly= true)
