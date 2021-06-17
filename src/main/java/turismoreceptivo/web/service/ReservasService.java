@@ -21,7 +21,7 @@ import turismoreceptivo.web.repository.ReservaRepository;
 public class ReservasService {
      
     @Autowired
-    private ReservaRepository rr;
+    private ReservaRepository reservaRepository;
     
     @Transactional
     public void crearReserva(String id,int personas, LocalDateTime fechahorario, Producto producto, List<Pasajero> pasajeros,
@@ -32,24 +32,24 @@ public class ReservasService {
         rva.setFechayhorario(fechahorario);
         rva.setProducto(producto);
         rva.setPasajeros(pasajeros);
-        rr.save(rva);   
+        reservaRepository.save(rva);   
     }
     
     @Transactional
     public void modificarReserva(String id,int personas, LocalDateTime fechahorario){
-        rr.modificar(id, personas, fechahorario);
+        reservaRepository.modificar(id, personas, fechahorario);
     }
     
     @Transactional (readOnly= true)
     public List<Reserva> listarReservas(){
-       return rr.findAll(); 
+       return reservaRepository.findAll(); 
     }
     
     @Transactional
     public void eliminarReserva (String id) throws ErrorService{
-        Optional<Reserva> resp=rr.findById(id);
+        Optional<Reserva> resp=reservaRepository.findById(id);
         if (resp.isPresent()){
-            rr.deleteById(id);
+            reservaRepository.deleteById(id);
         }else{
            throw new ErrorService("La reserva no fue encontrada");
         }
@@ -57,6 +57,6 @@ public class ReservasService {
     
     @Transactional (readOnly= true)
     public List<Reserva> buscarPorFecha(LocalDateTime fechahorario){
-        return rr.buscarPorFecha(fechahorario);
+        return reservaRepository.buscarPorFecha(fechahorario);
     }
 }
