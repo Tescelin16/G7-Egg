@@ -13,6 +13,7 @@ import turismoreceptivo.web.entity.Producto;
 import turismoreceptivo.web.entity.Reserva;
 import turismoreceptivo.web.entity.Usuario;
 import turismoreceptivo.web.error.ErrorService;
+import turismoreceptivo.web.repository.AgenciaRepository;
 import turismoreceptivo.web.repository.ReservaRepository;
 
 
@@ -22,6 +23,8 @@ public class ReservasService {
      
     @Autowired
     private ReservaRepository reservaRepository;
+    @Autowired
+    private AgenciaRepository agenciaRepository;
     
     @Transactional
     public void crearReserva(String id,int personas, LocalDateTime fechahorario, Producto producto, List<Pasajero> pasajeros,
@@ -58,5 +61,19 @@ public class ReservasService {
     @Transactional (readOnly= true)
     public List<Reserva> buscarPorFecha(LocalDateTime fechahorario){
         return reservaRepository.buscarPorFecha(fechahorario);
+    }
+    
+    @Transactional 
+    public List<Reserva> buscarPorAgencia (Integer legajo){
+        Optional<Agencia> resp=agenciaRepository.findById(legajo);
+        if(resp.isPresent()){
+            Agencia agencia=agenciaRepository.getById(legajo);
+            return reservaRepository.buscarPorAgencia(agencia);
+        }
+    return null;
+}
+    @Transactional
+    public List<Reserva> buscarPorAgenciaId (Integer legajo){
+        return reservaRepository.buscarPorAgenciaId(legajo);
     }
 }
