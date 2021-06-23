@@ -63,9 +63,10 @@ public class ReservasController {
     }
     
     @PostMapping("/guardar")
-    public RedirectView guardar(@RequestParam String id,@RequestParam int personas,@RequestParam LocalDateTime fechahorario,@RequestParam Producto producto,@RequestParam List<Pasajero> pasajeros,@RequestParam
-    Usuario usuario,@RequestParam Agencia agencia){
-        reservasService.crearReserva(id,personas,fechahorario,producto,pasajeros,usuario,agencia);
+    public RedirectView guardar(@RequestParam String id,@RequestParam int personas,@RequestParam LocalDateTime fechahorario,
+    @RequestParam String idProducto,@RequestParam List<Pasajero> pasajeros,@RequestParam
+    Integer dni,@RequestParam Integer legajo){
+        reservasService.crearReserva(id,personas,fechahorario,idProducto,pasajeros,dni,legajo);
         return new RedirectView("/reserva");
     }
     
