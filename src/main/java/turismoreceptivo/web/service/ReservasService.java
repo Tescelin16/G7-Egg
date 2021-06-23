@@ -14,7 +14,9 @@ import turismoreceptivo.web.entity.Reserva;
 import turismoreceptivo.web.entity.Usuario;
 import turismoreceptivo.web.error.ErrorService;
 import turismoreceptivo.web.repository.AgenciaRepository;
+import turismoreceptivo.web.repository.ProductoRepository;
 import turismoreceptivo.web.repository.ReservaRepository;
+import turismoreceptivo.web.repository.UsuarioRepository;
 
 
 
@@ -25,16 +27,22 @@ public class ReservasService {
     private ReservaRepository reservaRepository;
     @Autowired
     private AgenciaRepository agenciaRepository;
+    @Autowired
+    private ProductoRepository productoRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
     
     @Transactional
-    public void crearReserva(String id,int personas, LocalDateTime fechahorario, Producto producto, List<Pasajero> pasajeros,
-    Usuario usuario, Agencia agencia){
+    public void crearReserva(String id,int personas, LocalDateTime fechahorario, String idProducto, List<Pasajero> pasajeros,
+    Integer dni, Integer legajo){
         Reserva rva=new Reserva();
         rva.setId(id);
         rva.setPersonas(personas);
         rva.setFechayhorario(fechahorario);
-        rva.setProducto(producto);
+        rva.setProducto(productoRepository.getById(idProducto));
         rva.setPasajeros(pasajeros);
+        rva.setUsuario(usuarioRepository.getById(dni));
+        rva.setAgencia(agenciaRepository.getById(legajo));
         reservaRepository.save(rva);   
     }
     
@@ -57,13 +65,16 @@ public class ReservasService {
            throw new ErrorService("La reserva no fue encontrada");
         }
     }
-    
+    @Transactional (readOnly= true)
+    public Reserva buscarPorId(String id){
+       return reservaRepository.findById(id).orElse(null); 
+    }
     @Transactional (readOnly= true)
     public List<Reserva> buscarPorFecha(LocalDateTime fechahorario){
         return reservaRepository.buscarPorFecha(fechahorario);
     }
     
-    @Transactional 
+    @Transactional (readOnly= true)
     public List<Reserva> buscarPorAgencia (Integer legajo){
         Optional<Agencia> resp=agenciaRepository.findById(legajo);
         if(resp.isPresent()){
@@ -72,7 +83,7 @@ public class ReservasService {
         }
     return null;
 }
-    @Transactional
+    @Transactional (readOnly= true)
     public List<Reserva> buscarPorAgenciaId (Integer legajo){
         return reservaRepository.buscarPorAgenciaId(legajo);
     }

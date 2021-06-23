@@ -40,6 +40,10 @@ public class PasajeroService {
     public Pasajero buscarPorDni(Integer dni) {
         return rr.findById(dni).orElse(null);
     }
+    @Transactional(readOnly = true)
+    public List<Pasajero> buscarPorReserva(String id) {
+        return rr.buscarPasajerosReserva(id);
+    }
 
     @Transactional
     public void eliminarPasajero(Integer dni) {

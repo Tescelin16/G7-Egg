@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agencia</title>
+    
+</head>
+<body>
+    <div>
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="table-secondary text-center">
+            <tr>
+                <th class="col-md-4 px-md-2" scope="col">Nombre</th>
+                <th class="col-md-4 px-md-2" scope="col">Legajo</th>
+                <th class="col-md-4 px-md-2" scope="col">Telefono</th>
+                <th class="col-md-4 px-md-2" scope="col">Email</th>
+                <th class="col-md-4 px-md-2" scope="col">Direccion</th>
+                <th class="col-md-4 px-md-2" scope="col">Reservas</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="Agencia : ${Agencia}">
+                <td class="col-md-4 px-md-2" th:text="${Agencia.nombre}"></td>
+                <td class="col-md-4 px-md-2">
+                    <span th:text="|${mascota.dueno.nombre} ${mascota.dueno.apellido}|"></span>
+                    <a class="ms-2" th:href="@{/usuarios/__${mascota.dueno.dni}__}">(Ver perfil)</a>
+                </td>
+                <td class="col-md-4 px-md-2 d-flex justify-content-around w-100">
+                    <a class="btn btn-secondary btn-sm" th:href="@{/mascotas/editar/__${mascota.id}__}">Editar</a>
+                    <form th:action="@{/mascotas/eliminar/__${mascota.id}__}" method="post">
+                        <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>
