@@ -57,13 +57,16 @@ public class ReservasService {
            throw new ErrorService("La reserva no fue encontrada");
         }
     }
-    
+    @Transactional (readOnly= true)
+    public Reserva buscarPorId(String id){
+       return reservaRepository.findById(id).orElse(null); 
+    }
     @Transactional (readOnly= true)
     public List<Reserva> buscarPorFecha(LocalDateTime fechahorario){
         return reservaRepository.buscarPorFecha(fechahorario);
     }
     
-    @Transactional 
+    @Transactional (readOnly= true)
     public List<Reserva> buscarPorAgencia (Integer legajo){
         Optional<Agencia> resp=agenciaRepository.findById(legajo);
         if(resp.isPresent()){
@@ -72,7 +75,7 @@ public class ReservasService {
         }
     return null;
 }
-    @Transactional
+    @Transactional (readOnly= true)
     public List<Reserva> buscarPorAgenciaId (Integer legajo){
         return reservaRepository.buscarPorAgenciaId(legajo);
     }
