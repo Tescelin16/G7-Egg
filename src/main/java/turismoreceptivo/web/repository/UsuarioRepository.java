@@ -17,4 +17,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     void modificar(@Param("dni") Integer dni, @Param("nombre") String nombre, @Param("apellido") String apellido,
             @Param("email") String email, @Param("telefono") String telefono, @Param("telefono2") String telefono2,
             @Param("alojamiento") String alojamiento, @Param("fechaNacimiento") Date fechaNacimiento);
+    
+    @Query("SELECT u FROM Usuario u WHERE u.username = :username")
+    Usuario buscarPorNombreDeUsuario(@Param("username") String username);
+    
 }

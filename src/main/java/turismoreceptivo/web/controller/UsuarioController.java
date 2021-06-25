@@ -27,15 +27,6 @@ public class UsuarioController {
         return mav;
     }
 
-    @GetMapping("/crear")
-    public ModelAndView crearUsuario() {
-        ModelAndView mav = new ModelAndView("usuario-formulario");
-        mav.addObject("usuario", new Usuario());
-        mav.addObject("title", "Crear Usuario");
-        mav.addObject("action", "guardar");
-        return mav;
-    }
-
     @GetMapping("/editar/{dni}")
     public ModelAndView editarUsuario(@PathVariable Integer dni) {
         ModelAndView mav = new ModelAndView("usuario-formulario");
@@ -45,12 +36,6 @@ public class UsuarioController {
         return mav;
     }
 
-    @PostMapping("/guardar")
-    public RedirectView guardarUsuario(@RequestParam Integer dni, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono,
-            @RequestParam String telefono2, @RequestParam String alojamiento, @RequestParam Date fechaNacimiento) {
-        usuarioService.crearUsuario(dni, nombre, apellido, email, telefono, telefono2, alojamiento, fechaNacimiento);
-        return new RedirectView("/usuarios");
-    }
 
     @PostMapping("/modificar")
     public RedirectView modificarUsuario(@RequestParam Integer dni, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono,

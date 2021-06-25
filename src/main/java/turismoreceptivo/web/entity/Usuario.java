@@ -2,6 +2,7 @@ package turismoreceptivo.web.entity;
 
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -28,4 +29,8 @@ public class Usuario {
 	
 	@OneToMany
 	private List<Reserva> reservas;
+        
+        @Column(unique = true)
+        private String username;
+        private String clave;
 }
