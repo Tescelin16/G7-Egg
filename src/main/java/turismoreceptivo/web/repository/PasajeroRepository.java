@@ -15,6 +15,6 @@ public interface PasajeroRepository extends JpaRepository<Pasajero, Integer> {
     @Query("UPDATE Pasajero p SET p.nombre = :nombre, p.apellido = :apellido, p.telefono = :telefono WHERE p.dni = :dni")
     void modificar(@Param("dni") Integer dni, @Param("nombre") String nombre, @Param("apellido") String apellido,
             @Param("telefono") String telefono);
-    @Query("SELECT Pasajero p WHERE p.reserva.id = :id")
+    @Query("SELECT p FROM Pasajero p WHERE p.reserva.id = :id")
     List<Pasajero> buscarPasajerosReserva(@Param("id") String id);
 }

@@ -24,7 +24,7 @@ public class PrincipalController {
         return new ModelAndView("index");
     }
 
-    @GetMapping
+    @GetMapping("/quienes-somos")
     public ModelAndView quienesSomos() {
         return new ModelAndView("quienes-somos");
     }

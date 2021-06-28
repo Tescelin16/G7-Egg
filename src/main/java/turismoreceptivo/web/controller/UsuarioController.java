@@ -20,7 +20,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping
+    @GetMapping("/mostrar-usuario")
     public ModelAndView mostrarUsuarios() {
         ModelAndView mav = new ModelAndView("usuarios");
         mav.addObject("usuarios", usuarioService.buscarTodos());

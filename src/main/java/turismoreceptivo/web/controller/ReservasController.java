@@ -12,13 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-import turismoreceptivo.web.entity.Agencia;
 import turismoreceptivo.web.entity.Pasajero;
-import turismoreceptivo.web.entity.Producto;
 import turismoreceptivo.web.entity.Reserva;
-import turismoreceptivo.web.entity.Usuario;
 import turismoreceptivo.web.error.ErrorService;
-import turismoreceptivo.web.service.AgenciaService;
 import turismoreceptivo.web.service.PasajeroService;
 import turismoreceptivo.web.service.ReservasService;
 
@@ -26,8 +22,6 @@ import turismoreceptivo.web.service.ReservasService;
 @RequestMapping("/reservas")
 public class ReservasController {
   
-    @Autowired 
-    private AgenciaService agenciaService; 
     @Autowired
     private ReservasService reservasService;
     @Autowired
@@ -39,7 +33,7 @@ public class ReservasController {
         mav.addObject("reservas", reservasService.buscarPorAgenciaId(legajo));
         return mav;
     }
-    @GetMapping
+    @GetMapping("/buscar-pasajero")
     public ModelAndView buscarPasajeros(@RequestParam String id){
         ModelAndView mav = new ModelAndView("pasajerosReserva");
         mav.addObject("pasajeros", pasajeroService.buscarPorReserva(id));

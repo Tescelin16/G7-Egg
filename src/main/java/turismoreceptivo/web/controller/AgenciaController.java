@@ -19,7 +19,7 @@ public class AgenciaController {
 	@Autowired
 	private AgenciaService agenciaService;
 	
-	@GetMapping
+	@GetMapping("/login")
 	public ModelAndView iniciarSesion(){
 		ModelAndView mav = new ModelAndView("agencia");
 		//mav.addObject("agencias", agenciaService.iniciarSesion());

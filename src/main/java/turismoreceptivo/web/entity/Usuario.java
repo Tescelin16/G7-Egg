@@ -1,5 +1,6 @@
 package turismoreceptivo.web.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -12,7 +13,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Usuario {
+public class Usuario implements Serializable {
 	
 	@Id
 	private Integer dni;

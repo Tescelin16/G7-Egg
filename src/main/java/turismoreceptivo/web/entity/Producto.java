@@ -1,5 +1,6 @@
 package turismoreceptivo.web.entity;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,8 +9,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Data
 @Entity
-public class Producto {
-	
+public class Producto implements Serializable {
+
 	@Id
 	@GeneratedValue(generator = "uuid")
         @GenericGenerator(name = "uuid", strategy = "uuid2")

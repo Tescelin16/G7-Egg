@@ -1,5 +1,6 @@
 package turismoreceptivo.web.entity;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,7 +9,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Agencia {
+public class Agencia implements Serializable {
 	
 	@Id
 	private Integer legajo;

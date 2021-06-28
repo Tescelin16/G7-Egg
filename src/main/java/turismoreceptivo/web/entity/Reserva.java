@@ -1,5 +1,6 @@
 package turismoreceptivo.web.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Entity;
@@ -12,7 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Data
 @Entity
-public class Reserva {
+public class Reserva implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid")
