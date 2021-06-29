@@ -1,8 +1,58 @@
-.navbar{
-    text-justify: distribute !important;
-    background-color: brown !important;
+body {
+  width: 100%;
 }
 
-.asd{
-    color:antiquewhite !important ;
+.logo {
+  display: flex;
+  justify-content: center !important;
+  width: 30%;
+  height: 70px;
+}
+.logonav {
+  align-items: center;
+  display: flex;
+  justify-content: center !important;
+  width: 35%;
+  height: 50px;
+}
+.header {
+  display: flex;
+  width: 100%;
+  background-color: #212529;
+  justify-content: space-between;
+}
+
+.datos {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 25px;
+  margin-left: 10px;
+}
+
+#position {
+  display: flex;
+  align-items: center;
+}
+
+.size_h6 {
+  color: white;
+  margin-right: 40px;
+}
+
+#color_icon {
+  color: white;
+  margin-right: 10px;
+}
+
+.buttons_header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.botones {
+  margin-top: 18px;
+}
+
+.minimenu {
+  text-align: center;
 }
