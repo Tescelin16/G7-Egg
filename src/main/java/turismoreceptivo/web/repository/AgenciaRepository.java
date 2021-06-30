@@ -11,7 +11,10 @@ import turismoreceptivo.web.entity.Agencia;
 public interface AgenciaRepository extends JpaRepository<Agencia, Integer> {
 
     @Modifying
-    @Query("UPDATE Agencia a SET a.nombre = :nombre, a.telefono = :telefono, a.email = :email, a.direccion = :direccion WHERE a.legajo = :legajo")
-    void modificar(@Param("legajo") Integer legajo, @Param("nombre") String nombre, @Param("telefono") String telefono,
-            @Param("direccion") String direccion, @Param("email") String email);
+    @Query("UPDATE Agencia a SET a.nombre = :nombre, a.telefono = :telefono, a.email = :email, a.direccion = :direccion, a.clave = :clave WHERE a.legajo = :legajo")
+    void modificar(@Param("legajo") String legajo, @Param("nombre") String nombre, @Param("telefono") String telefono,
+            @Param("direccion") String direccion, @Param("email") String email, @Param("clave") String clave);
+    
+    @Query("SELECT a FROM Agencia a WHERE a.legajo = :legajo")
+    Agencia buscarPorLegajo(@Param("legajo") String legajo);
 }

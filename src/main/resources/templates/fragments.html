@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<header th:fragment="header" class="header">
+    <div class="datos">
+      <svg
+        id="color_icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-telephone-inbound-fill"
+        viewBox="0 0 16 16"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zM15.854.146a.5.5 0 0 1 0 .708L11.707 5H14.5a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 1 0v2.793L15.146.146a.5.5 0 0 1 .708 0z"
+        ></path>
+      </svg>
+
+      <h6 class="size_h6">+549 261 902056999</h6>
+
+      <svg
+        id="color_icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-envelope"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"
+        />
+      </svg>
+      <h6 class="size_h6">turismo@receptivo.com</h6>
+    </div>
+
+    <div class="logo">
+      <a>
+        <!-- <a href='https://es.pngtree.com/so/bandera-argentina-vintage'>bandera argentina vintage png de es.pngtree.com</a> -->
+        <img class="logo" th:src="@{/img/—Pngtree—vintage argentina flag design_6449776.png}" alt="LOGO" />
+      </a>
+    </div>
+
+    <div class="botones">
+      <button
+        class="btn btn-outline-light btn-sm dropdown-toggle"
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-shield-lock"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"
+          />
+          <path
+            d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415z"
+          />
+        </svg>
+        Agencia
+      </button>
+      <ul class="dropdown-menu minimenu">
+        <li>Ya tienes cuenta?</li>
+        <li><a class="btn btn-dark" href="">Ingresar</a></li>
+        <li>No tienes cuenta?</li>
+        <li><a class="btn btn-dark" th:href="@{/agencia/crear}">Registrarse</a></li>
+      </ul>
+
+      <button
+        class="btn btn-outline-light btn-sm dropdown-toggle"
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-person-circle"
+          viewBox="0 0 16 16"
+        >
+          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+          <path
+            fill-rule="evenodd"
+            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+          />
+        </svg>
+        Usuario
+      </button>
+      <ul class="dropdown-menu minimenu">
+        <li>Ya tienes cuenta?</li>
+        <li><a class="btn btn-dark" href="">Ingresar</a></li>
+        <li>No tienes cuenta?</li>
+        <li><a class="btn btn-dark" th:href="@{/usuarios/registro}">Registrarse</a></li>
+      </ul>
+    </div>
+  </header>
+  <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-success">
+    <div class="container-fluid">
+      <a class="navbar-brand" th:href="@{/index}">Inicio</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Excursiones</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">¿Quienes Somos?</a>
+          </li>
+        </ul>
+        <a class="logonav">
+          <img class="logonav" th:src="@{/img/mendozaultimo.jpg}" alt="LOGO" />
+        </a>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Búsqueda..." aria-label="Search">
+          <button class="btn btn-outline-dark" type="submit">Buscar</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</html>

@@ -9,11 +9,11 @@ body {
   height: 70px;
 }
 .logonav {
-  align-items: center;
   display: flex;
-  justify-content: center !important;
+  justify-content: space-between !important;
   width: 35%;
-  height: 50px;
+  height: 60px;
+  margin-inline-end: 30px;
 }
 .header {
   display: flex;
