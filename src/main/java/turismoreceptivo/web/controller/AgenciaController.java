@@ -42,7 +42,7 @@ public class AgenciaController {
 	
 	@GetMapping("/crear")
 	public ModelAndView crear(){
-		ModelAndView mav = new ModelAndView("agencia-formulario");
+		ModelAndView mav = new ModelAndView("registro-agencia");
 		mav.addObject("agencia", new Agencia());
 		mav.addObject("title", "Crear Agencia");
 		mav.addObject("action", "guardar");
@@ -50,9 +50,9 @@ public class AgenciaController {
 	}
 	
 	@PostMapping("/guardar")
-	public RedirectView guardar(@RequestParam Integer legajo, @RequestParam String nombre, @RequestParam String telefono, @RequestParam String direccion, @RequestParam String email){
-		agenciaService.crear(legajo, nombre, telefono, direccion, email);
-		return new RedirectView("/agencia");
+	public RedirectView guardar(@RequestParam String legajo, @RequestParam String nombre, @RequestParam String telefono, @RequestParam String direccion, @RequestParam String email, @RequestParam String clave){
+		agenciaService.crear(legajo, nombre, telefono, direccion, email, clave);
+		return new RedirectView("/index");
 	}
 	
 	@GetMapping("/editar/{legajo}")
@@ -65,8 +65,8 @@ public class AgenciaController {
 	}
 	
 	@PostMapping("/modificar")
-	public RedirectView modificar(@RequestParam Integer legajo, @RequestParam String nombre, @RequestParam String telefono, @RequestParam String direccion, @RequestParam String email){
-		agenciaService.modificar(legajo, nombre, telefono, direccion, email);
+	public RedirectView modificar(@RequestParam String legajo, @RequestParam String nombre, @RequestParam String telefono, @RequestParam String direccion, @RequestParam String email, @RequestParam String clave){
+		agenciaService.modificar(legajo, nombre, telefono, direccion, email, clave);
 		return new RedirectView("/agencia");
 	}
 	

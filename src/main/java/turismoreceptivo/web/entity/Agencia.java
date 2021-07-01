@@ -12,12 +12,14 @@ import lombok.Data;
 public class Agencia implements Serializable {
 	
 	@Id
-	private Integer legajo;
+	private String legajo;
 	
 	private String nombre;
 	private String telefono;
 	private String direccion;
 	private String email;
+        
+        private String clave;
 	
 	@OneToMany
 	private List<Reserva> reservas;
