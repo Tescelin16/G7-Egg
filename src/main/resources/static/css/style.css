@@ -1,5 +1,6 @@
 body {
   width: 100%;
+  background-color: #f7f7f7;
 }
 
 .logo {
@@ -8,18 +9,19 @@ body {
   width: 30%;
   height: 70px;
 }
-.logonav {
-  align-items: center;
+.logonav{
   display: flex;
-  justify-content: center !important;
+  justify-content: space-between!important;
   width: 35%;
-  height: 50px;
+  height: 60px;
+  margin-inline-end: 30px;
 }
 .header {
   display: flex;
   width: 100%;
   background-color: #212529;
   justify-content: space-between;
+  position: inherit !important;
 }
 
 .datos {
@@ -55,4 +57,80 @@ body {
 
 .minimenu {
   text-align: center;
+  border-style: groove;
+  border-color: #212529;
+  opacity: unset;
+}
+
+.container{
+  width: 100%;
+  justify-content: right !important;
+  margin-top: 100px;
+}
+
+#carrusel{
+  align-items: center;
+  width: 800px;
+  height: 450px;
+}
+
+#fijo{
+}
+
+.descripcion{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 100px;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.items{
+  display: flex;
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+
+}
+
+#item1{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+  height: 350px;
+  background-image: url(../img/Embalse-de-Potrerillos.jpg);
+  margin-left: 200px;
+  margin-right: 140px;
+  background-size: 100% 100%;
+  color: #f7f7f7;
+  text-align: justify;
+  justify-content: center;
+
+}
+
+#item2{
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+  height: 350px;
+  background-image: url(../img/tarjeta2.jpg);
+  background-size: 100% 100%;
+  color: #f7f7f7;
+  text-align: justify;
+  justify-content: center;
+  align-items: center;
+}
+
+#texto1{
+  align-items: flex-end !important;
+  justify-content: center;
+  color: #f7f7f7;
+}
+
+#texto2{
+  align-items: flex-end !important;
+  justify-content: center;
+  color: #f7f7f7;
 }
