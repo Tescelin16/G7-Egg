@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import turismoreceptivo.web.service.AgenciaService;
 import turismoreceptivo.web.service.UsuarioService;
 
 @Configuration
@@ -17,12 +18,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private UsuarioService usuarioService;
     
     @Autowired
+    private AgenciaService agenciaService;
+    
+    @Autowired
     private BCryptPasswordEncoder encoder;
     
     @Autowired 
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
         auth
                 .userDetailsService(usuarioService)
+                .passwordEncoder(encoder)
+            .and()
+                .userDetailsService(agenciaService)
                 .passwordEncoder(encoder);
     }
     
@@ -31,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         
         http
                 .authorizeRequests()
-                   .antMatchers("/static/**", "/templates/index", "/templates/fragments", "/templates/registro-agencia", "/templates/registro-usuario").permitAll()
+                   .antMatchers("/static/**").permitAll()
                    .antMatchers("/**").permitAll()
                 .and()
                     .formLogin()

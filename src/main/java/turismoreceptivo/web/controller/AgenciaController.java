@@ -21,7 +21,7 @@ public class AgenciaController {
 	
 	@GetMapping("/login")
 	public ModelAndView iniciarSesion(){
-		ModelAndView mav = new ModelAndView("agencia");
+		ModelAndView mav = new ModelAndView("login");
 		//mav.addObject("agencias", agenciaService.iniciarSesion());
 		mav.addObject("title", "Iniciar Sesion");
 		mav.addObject("action", "login");
@@ -29,8 +29,8 @@ public class AgenciaController {
 	}
 	
 	@PostMapping("/login")
-	public RedirectView loguear(@RequestParam String mailUser, @RequestParam String contrasenia){
-		//agenciaService.iniciarSesion(mailUser, contrasenia);
+	public RedirectView loguear(@RequestParam String legajo, @RequestParam String clave){
+		//agenciaService.iniciarSesion(legajo, clave);
 		return new RedirectView("/agencia");
 	}
 	@GetMapping

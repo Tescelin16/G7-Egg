@@ -74,9 +74,6 @@ body {
   height: 450px;
 }
 
-#fijo{
-}
-
 .descripcion{
   display: flex;
   align-items: center;
@@ -94,10 +91,8 @@ body {
 
 }
 
+
 #item1{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 400px;
   height: 350px;
   background-image: url(../img/Embalse-de-Potrerillos.jpg);
@@ -105,32 +100,64 @@ body {
   margin-right: 140px;
   background-size: 100% 100%;
   color: #f7f7f7;
-  text-align: justify;
-  justify-content: center;
-
 }
 
 #item2{
-  display: flex;
-  justify-content: space-between;
   width: 400px;
   height: 350px;
-  background-image: url(../img/tarjeta2.jpg);
+  background-image: url(../img/nuevoexcursiones.jpg);
   background-size: 100% 100%;
   color: #f7f7f7;
-  text-align: justify;
-  justify-content: center;
-  align-items: center;
 }
 
+.parrafo{
+  font-size: 15px;
+  margin-left: 75px;
+  margin-right: 75px;
+  margin-bottom: 50px;
+  color: #FFFFFFB3;
+}
+
+.texto{
+  margin-bottom: 40px;
+  margin-left: 75px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.botonsito{
+  margin-left: 75px;
+  margin-right: 75px;
+}
 #texto1{
-  align-items: flex-end !important;
-  justify-content: center;
-  color: #f7f7f7;
+  margin-bottom: 20px;
 }
 
 #texto2{
-  align-items: flex-end !important;
-  justify-content: center;
+  margin-bottom: 20px;
+}
+
+#intro {
+  margin-top: 100px;
+  background-image: url(../img/nuevotravel.jpg);
+  background-size: 100% 100%;
+  /*
+  width: 80%;
+  height: 100%;
+  */
+  margin-bottom: 100px !important;
+  margin-left: 5% !important;
+  margin-right: 5% !important;
+}
+.titulo {
+  font-size: 30px;
   color: #f7f7f7;
+  font-family: Verdana, Tahoma, sans-serif;
+  margin-top: 30px;
+  margin-left: 150px;
+  margin-right: 150px;
+}
+.texto-comercial {
+    color: antiquewhite;
+    font-size: 30px;
+    margin-bottom: 40px;
 }
