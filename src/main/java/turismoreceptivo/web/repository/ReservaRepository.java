@@ -15,7 +15,7 @@ public interface ReservaRepository extends JpaRepository<Reserva, String> {
 
     @Modifying
     @Query("UPDATE Reserva r SET r.personas = :personas, r.fechayhorario = :fechayhorario WHERE r.id = :id")
-    void modificar(@Param("id") String id, @Param("personas") int personas, @Param("fechayhorario") LocalDateTime fechayhorario);
+    void modificar(@Param("personas") int personas, @Param("fechayhorario") LocalDateTime fechayhorario);
 
     @Query("SELECT r FROM Reserva r WHERE r.fechayhorario = :fechayhorario")
     List<Reserva> buscarPorFecha(@Param("fechayhorario") LocalDateTime fechayhorario);

@@ -2,6 +2,7 @@
 package turismoreceptivo.web.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,10 +34,9 @@ public class ReservasService {
     private UsuarioRepository usuarioRepository;
     
     @Transactional
-    public void crearReserva(String id,int personas, LocalDateTime fechahorario, String idProducto, List<Pasajero> pasajeros,
-    Integer dni, Integer legajo){
+    public void crearReserva(int personas, LocalDateTime fechahorario, String idProducto, List<Pasajero> pasajeros,
+    Integer dni, String legajo){
         Reserva rva=new Reserva();
-        rva.setId(id);
         rva.setPersonas(personas);
         rva.setFechayhorario(fechahorario);
         rva.setProducto(productoRepository.getById(idProducto));
@@ -47,14 +47,25 @@ public class ReservasService {
     }
     
     @Transactional
-    public void modificarReserva(String id,int personas, LocalDateTime fechahorario){
-        reservaRepository.modificar(id, personas, fechahorario);
+    public void modificarReserva(int personas, LocalDateTime fechahorario){
+        reservaRepository.modificar(personas, fechahorario);
     }
     
     @Transactional (readOnly= true)
     public List<Reserva> listarReservas(){
        return reservaRepository.findAll(); 
     }
+	@Transactional(readOnly = true)
+	public List<String> cantidad(){
+		List<String> cantidadPersonas = new ArrayList<>();
+		cantidadPersonas.add("1");
+		cantidadPersonas.add("2");
+		cantidadPersonas.add("3");
+		cantidadPersonas.add("4");
+		cantidadPersonas.add("5");
+		cantidadPersonas.add("6");
+		return cantidadPersonas;
+	}
     
     @Transactional
     public void eliminarReserva (String id) throws ErrorService{
@@ -75,7 +86,7 @@ public class ReservasService {
     }
     
     @Transactional (readOnly= true)
-    public List<Reserva> buscarPorAgencia (Integer legajo){
+    public List<Reserva> buscarPorAgencia (String legajo){
         Optional<Agencia> resp=agenciaRepository.findById(legajo);
         if(resp.isPresent()){
             Agencia agencia=agenciaRepository.getById(legajo);

@@ -37,8 +37,8 @@ public class AgenciaService implements UserDetailsService{
     }
 
     @Transactional
-    public void modificar(String legajo, String nombre, String telefono, String direccion, String email, String clave) {
-        agenciaRepository.modificar(legajo, nombre, telefono, direccion, email, clave);
+    public void modificar(String nombre, String telefono, String direccion, String email, String clave) {
+        agenciaRepository.modificar(nombre, telefono, direccion, email, clave);
     }
 
     @Transactional(readOnly = true)
@@ -47,13 +47,13 @@ public class AgenciaService implements UserDetailsService{
     }
 
     @Transactional(readOnly = true)
-    public Agencia buscarPorLegajo(Integer legajo) {
+    public Agencia buscarPorLegajo(String legajo) {
         Optional<Agencia> agenciaOptional = agenciaRepository.findById(legajo);
         return agenciaOptional.orElse(null);
     }
 
     @Transactional
-    public void eliminar(Integer legajo) {
+    public void eliminar(String legajo) {
         agenciaRepository.deleteById(legajo);
     }
     
