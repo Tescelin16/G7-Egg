@@ -27,18 +27,19 @@ public class ReservasController {
     @Autowired
     private PasajeroService pasajeroService;
     
-    @GetMapping
-    public ModelAndView buscarReserva(@RequestParam Integer legajo){
-        ModelAndView mav = new ModelAndView("reservasAgencia");
+     @GetMapping
+    public ModelAndView listarReservas(@RequestParam String id){
+        ModelAndView mav = new ModelAndView("todas-reservas");
+        mav.addObject("reservas", reservasService.listarReservas());
+        return mav;
+    }
+    @GetMapping("/reservasAgencia")
+    public ModelAndView buscarReserva(@RequestParam String legajo){
+        ModelAndView mav = new ModelAndView("reservas");
         mav.addObject("reservas", reservasService.buscarPorAgenciaId(legajo));
         return mav;
     }
-    @GetMapping("/buscar-pasajero")
-    public ModelAndView buscarPasajeros(@RequestParam String id){
-        ModelAndView mav = new ModelAndView("pasajerosReserva");
-        mav.addObject("pasajeros", pasajeroService.buscarPorReserva(id));
-        return mav;
-    }
+   
     @GetMapping("/crear")
     public ModelAndView crearReserva(){
         ModelAndView mav = new ModelAndView("reserva-formulario");
@@ -59,7 +60,7 @@ public class ReservasController {
     @PostMapping("/guardar")
     public RedirectView guardar(@RequestParam String id,@RequestParam int personas,@RequestParam LocalDateTime fechahorario,
     @RequestParam String idProducto,@RequestParam List<Pasajero> pasajeros,@RequestParam
-    Integer dni,@RequestParam Integer legajo){
+    Integer dni,@RequestParam String legajo){
         reservasService.crearReserva(id,personas,fechahorario,idProducto,pasajeros,dni,legajo);
         return new RedirectView("/reserva");
     }

@@ -24,5 +24,5 @@ public interface ReservaRepository extends JpaRepository<Reserva, String> {
     List<Reserva> buscarPorAgencia(@Param("agencia") Agencia agencia);
 
     @Query("SELECT r FROM Reserva r WHERE r.agencia.legajo = :legajo")
-    List<Reserva> buscarPorAgenciaId(@Param("legajo") Integer legajo);
+    List<Reserva> buscarPorAgenciaId(@Param("legajo") String legajo);
 }

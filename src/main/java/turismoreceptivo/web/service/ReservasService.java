@@ -34,7 +34,7 @@ public class ReservasService {
     
     @Transactional
     public void crearReserva(String id,int personas, LocalDateTime fechahorario, String idProducto, List<Pasajero> pasajeros,
-    Integer dni, Integer legajo){
+    Integer dni, String legajo){
         Reserva rva=new Reserva();
         rva.setId(id);
         rva.setPersonas(personas);
@@ -42,7 +42,7 @@ public class ReservasService {
         rva.setProducto(productoRepository.getById(idProducto));
         rva.setPasajeros(pasajeros);
         rva.setUsuario(usuarioRepository.getById(dni));
-        rva.setAgencia(agenciaRepository.getById(legajo));
+        rva.setAgencia(agenciaRepository.buscarPorLegajo(legajo));
         reservaRepository.save(rva);   
     }
     
@@ -84,7 +84,7 @@ public class ReservasService {
     return null;
 }
     @Transactional (readOnly= true)
-    public List<Reserva> buscarPorAgenciaId (Integer legajo){
+    public List<Reserva> buscarPorAgenciaId (String legajo){
         return reservaRepository.buscarPorAgenciaId(legajo);
     }
 }
