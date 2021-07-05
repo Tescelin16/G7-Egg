@@ -42,10 +42,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                    .antMatchers("/**").permitAll()
                 .and()
                     .formLogin()
+<<<<<<< Updated upstream
                         .loginPage("/login")
+=======
+                        .loginPage("/login-usuario")
+>>>>>>> Stashed changes
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .loginProcessingUrl("/logincheck")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/", true)
+                        .permitAll()
+                .and()
+                    .formLogin()
+                        .loginPage("/login-agencia")
+                        .usernameParameter("username")
+                        .passwordParameter("password")
+                        .loginProcessingUrl("/login")
                         .defaultSuccessUrl("/", true)
                         .permitAll()
                 .and()
