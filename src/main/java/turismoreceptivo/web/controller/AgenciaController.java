@@ -21,15 +21,15 @@ public class AgenciaController {
 	
 	@GetMapping("/login-agencia")
 	public ModelAndView iniciarSesion(){
-		ModelAndView mav = new ModelAndView("agencia");
+		ModelAndView mav = new ModelAndView("login");
 		mav.addObject("title", "Iniciar Sesion");
 		mav.addObject("action", "login");
 		return mav;
 	}
 	
 	@PostMapping("/login")
-	public RedirectView loguear(@RequestParam String mailUser, @RequestParam String contrasenia){
-		return new RedirectView("/agencia");
+	public RedirectView loguear(){
+		return new RedirectView("/index");
 	}
 	@GetMapping
 	public ModelAndView mostrarTodos(){
