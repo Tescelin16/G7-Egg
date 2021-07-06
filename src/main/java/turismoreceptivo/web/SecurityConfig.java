@@ -42,11 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                    .antMatchers("/**").permitAll()
                 .and()
                     .formLogin()
-<<<<<<< Updated upstream
-                        .loginPage("/login")
-=======
                         .loginPage("/login-usuario")
->>>>>>> Stashed changes
                         .usernameParameter("username")
                         .passwordParameter("password")
                         .loginProcessingUrl("/login")

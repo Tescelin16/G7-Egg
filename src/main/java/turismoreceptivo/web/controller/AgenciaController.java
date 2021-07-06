@@ -18,12 +18,8 @@ public class AgenciaController {
 
 	@Autowired
 	private AgenciaService agenciaService;
-	
-<<<<<<< Updated upstream
-	@GetMapping("/login")
-=======
+
 	@GetMapping("/login-agencia")
->>>>>>> Stashed changes
 	public ModelAndView iniciarSesion(){
 		ModelAndView mav = new ModelAndView("login");
 		//mav.addObject("agencias", agenciaService.iniciarSesion());
@@ -56,17 +52,12 @@ public class AgenciaController {
 	@PostMapping("/guardar")
 	public RedirectView guardar(@RequestParam String legajo, @RequestParam String nombre, @RequestParam String telefono, @RequestParam String direccion, @RequestParam String email, @RequestParam String clave){
 		agenciaService.crear(legajo, nombre, telefono, direccion, email, clave);
-		return new RedirectView("/index");
+		return new RedirectView("/agencia");
 	}
 	
 	@GetMapping("/editar/{legajo}")
-<<<<<<< Updated upstream
-	public ModelAndView editar(@PathVariable Integer legajo){
-		ModelAndView mav = new ModelAndView("agencia-formulario");
-=======
 	public ModelAndView editar(@PathVariable String legajo){
 		ModelAndView mav = new ModelAndView("registro-agencia");
->>>>>>> Stashed changes
 		mav.addObject("agencia", agenciaService.buscarPorLegajo(legajo));
 		mav.addObject("title", "Editar Agencia");
 		mav.addObject("action", "modificar");

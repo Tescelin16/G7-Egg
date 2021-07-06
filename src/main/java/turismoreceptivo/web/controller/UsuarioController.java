@@ -61,11 +61,7 @@ public class UsuarioController {
         return new RedirectView("/usuarios");
     }
 
-<<<<<<< Updated upstream
-    @GetMapping("/login")
-=======
     @GetMapping("login-usuario")
->>>>>>> Stashed changes
     public ModelAndView iniciarSesion() {
         ModelAndView mav = new ModelAndView("login");
         //mav.addObject("agencias", agenciaService.iniciarSesion());

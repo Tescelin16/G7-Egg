@@ -15,8 +15,10 @@ import org.springframework.web.servlet.view.RedirectView;
 import turismoreceptivo.web.entity.Pasajero;
 import turismoreceptivo.web.entity.Reserva;
 import turismoreceptivo.web.error.ErrorService;
-import turismoreceptivo.web.service.PasajeroService;
+import turismoreceptivo.web.service.AgenciaService;
+import turismoreceptivo.web.service.ProductoService;
 import turismoreceptivo.web.service.ReservasService;
+import turismoreceptivo.web.service.UsuarioService;
 
 @Controller
 @RequestMapping("/reservas")
@@ -25,7 +27,11 @@ public class ReservasController {
     @Autowired
     private ReservasService reservasService;
     @Autowired
-    private PasajeroService pasajeroService;
+    private UsuarioService usuarioService;
+    @Autowired
+    private AgenciaService agenciaService;
+    @Autowired
+    private ProductoService productoService;
     
      @GetMapping
     public ModelAndView listarReservas(@RequestParam String id){
@@ -40,10 +46,14 @@ public class ReservasController {
         return mav;
     }
    
-    @GetMapping("/crear")
-    public ModelAndView crearReserva(){
+    @GetMapping("/crear/{id}")
+    public ModelAndView crearReserva(@PathVariable String id, @RequestParam(required = false) String legajo, @RequestParam(required = false) Integer dni){
         ModelAndView mav = new ModelAndView("reserva-formulario");
-        mav.addObject("agencia", new Reserva());
+        mav.addObject("cantPersonas", reservasService.cantidad());
+	mav.addObject("usuario", usuarioService.buscarPorDni(dni));
+        mav.addObject("producto", productoService.buscarPorId(id));
+	mav.addObject("agencia", agenciaService.buscarPorLegajo(legajo));
+        mav.addObject("reserva", new Reserva());
         mav.addObject("title", "Crear Reserva");
         mav.addObject("action", "guardar");
         return mav;
@@ -51,6 +61,7 @@ public class ReservasController {
     @GetMapping("/editar/{id}")
     public ModelAndView editarReserva(@PathVariable String id){
         ModelAndView mav = new ModelAndView("reserva-formulario");
+        mav.addObject("cantPersonas", reservasService.cantidad());
         mav.addObject("reserva", reservasService.buscarPorId(id));
         mav.addObject("title", "Editar Agencia");
         mav.addObject("action", "modificar");
@@ -58,16 +69,16 @@ public class ReservasController {
     }
     
     @PostMapping("/guardar")
-    public RedirectView guardar(@RequestParam String id,@RequestParam int personas,@RequestParam LocalDateTime fechahorario,
+    public RedirectView guardar(@RequestParam int personas,@RequestParam LocalDateTime fechahorario,
     @RequestParam String idProducto,@RequestParam List<Pasajero> pasajeros,@RequestParam
     Integer dni,@RequestParam String legajo){
-        reservasService.crearReserva(id,personas,fechahorario,idProducto,pasajeros,dni,legajo);
+        reservasService.crearReserva(personas,fechahorario,idProducto,pasajeros,dni,legajo);
         return new RedirectView("/reserva");
     }
     
-    @PostMapping("/modificar")
-    public RedirectView modificar(@RequestParam String id,@RequestParam int personas,@RequestParam LocalDateTime fechahorario){
-        reservasService.modificarReserva(id,personas,fechahorario);
+    @PostMapping("/modificar/{id}")
+    public RedirectView modificar(@PathVariable String id, @RequestParam int personas, @RequestParam LocalDateTime fechahorario){
+        reservasService.modificarReserva(id, personas, fechahorario);
         return new RedirectView("/reserva");
     }
     
