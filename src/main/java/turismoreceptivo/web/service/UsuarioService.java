@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,8 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import turismoreceptivo.web.entity.Usuario;
 import turismoreceptivo.web.error.ErrorService;
 import turismoreceptivo.web.repository.UsuarioRepository;
@@ -112,12 +109,6 @@ public class UsuarioService implements UserDetailsService{
             throw new UsernameNotFoundException("No hay ningun usuario con el username " + username);
         }
         
-//        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-//        HttpSession session = attributes.getRequest().getSession(true);
-//        
-//        session.setAttribute("username", usuario.getUsername());
-//        session.setAttribute("idUsuario", usuario.getDni());
-//        
         User user = new User(usuario.getUsername(), usuario.getClave(), Collections.EMPTY_LIST);
         return user;
     }
