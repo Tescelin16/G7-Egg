@@ -32,9 +32,15 @@ public class ReservasController {
     @Autowired
     private ProductoService productoService;
 
-    @GetMapping
-    public ModelAndView buscarReserva(@RequestParam String legajo) {
-        ModelAndView mav = new ModelAndView("reservasAgencia");
+     @GetMapping
+    public ModelAndView listarReservas(){
+        ModelAndView mav = new ModelAndView("reservas");
+        mav.addObject("reservas", reservasService.listarReservas());
+        return mav;
+    }
+      @GetMapping("/reservasAgencia")
+    public ModelAndView buscarReserva(@RequestParam String legajo){
+        ModelAndView mav = new ModelAndView("reservas");
         mav.addObject("reservas", reservasService.buscarPorAgenciaId(legajo));
         return mav;
     }
