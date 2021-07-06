@@ -61,9 +61,9 @@ public class UsuarioController {
         return new RedirectView("/usuarios");
     }
 
-    @GetMapping
+    @GetMapping("login-usuario")
     public ModelAndView iniciarSesion() {
-        ModelAndView mav = new ModelAndView("");
+        ModelAndView mav = new ModelAndView("login");
         //mav.addObject("agencias", agenciaService.iniciarSesion());
         mav.addObject("title", "Iniciar Sesion");
         mav.addObject("action", "login");
@@ -71,8 +71,8 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public RedirectView loguear(@RequestParam String mailUser, @RequestParam String contrasenia) {
-        //agenciaService.iniciarSesion(mailUser, contrasenia);
+    public RedirectView loguear(@RequestParam String username, @RequestParam String clave) {
+        //agenciaService.iniciarSesion(username, clave);
         return new RedirectView("/agencia");
     }
 

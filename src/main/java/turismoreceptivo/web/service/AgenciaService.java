@@ -3,6 +3,7 @@ package turismoreceptivo.web.service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import turismoreceptivo.web.entity.Agencia;
 import turismoreceptivo.web.repository.AgenciaRepository;
 
@@ -65,6 +68,12 @@ public class AgenciaService implements UserDetailsService{
             throw new UsernameNotFoundException("No hay ninguna agencia con el legajo: " + legajo);
         }
         
+//        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+//        HttpSession session = attributes.getRequest().getSession(true);
+//        
+//        session.setAttribute("nombre", agencia.getNombre());
+//        session.setAttribute("legajo", agencia.getLegajo());
+//        
         User user = new User(agencia.getLegajo(), agencia.getClave(), Collections.EMPTY_LIST);
         return user;
     }
