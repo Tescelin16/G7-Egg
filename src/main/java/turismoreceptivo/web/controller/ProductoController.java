@@ -16,7 +16,7 @@ import turismoreceptivo.web.service.ProductoService;
 
 
 @Controller
-@RequestMapping("/producto")
+@RequestMapping("/Producto")
 public class ProductoController {
     
     @Autowired

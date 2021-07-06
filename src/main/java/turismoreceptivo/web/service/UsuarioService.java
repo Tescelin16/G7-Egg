@@ -109,6 +109,8 @@ public class UsuarioService implements UserDetailsService{
             throw new UsernameNotFoundException("No hay ningun usuario con el username " + username);
         }
         
+        
+        
         User user = new User(usuario.getUsername(), usuario.getClave(), Collections.EMPTY_LIST);
         return user;
     }

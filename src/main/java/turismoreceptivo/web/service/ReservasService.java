@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import turismoreceptivo.web.entity.Agencia;
 import turismoreceptivo.web.entity.Pasajero;
-import turismoreceptivo.web.entity.Producto;
 import turismoreceptivo.web.entity.Reserva;
-import turismoreceptivo.web.entity.Usuario;
 import turismoreceptivo.web.error.ErrorService;
 import turismoreceptivo.web.repository.AgenciaRepository;
 import turismoreceptivo.web.repository.ProductoRepository;
@@ -43,12 +41,13 @@ public class ReservasService {
         rva.setPasajeros(pasajeros);
         rva.setUsuario(usuarioRepository.getById(dni));
         rva.setAgencia(agenciaRepository.getById(legajo));
+        rva.setAgencia(agenciaRepository.buscarPorLegajo(legajo));
         reservaRepository.save(rva);   
     }
     
     @Transactional
-    public void modificarReserva(int personas, LocalDateTime fechahorario){
-        reservaRepository.modificar(personas, fechahorario);
+    public void modificarReserva(String id, int personas, LocalDateTime fechahorario){
+        reservaRepository.modificar(id, personas, fechahorario);
     }
     
     @Transactional (readOnly= true)
@@ -95,7 +94,7 @@ public class ReservasService {
     return null;
 }
     @Transactional (readOnly= true)
-    public List<Reserva> buscarPorAgenciaId (Integer legajo){
+    public List<Reserva> buscarPorAgenciaId (String legajo){
         return reservaRepository.buscarPorAgenciaId(legajo);
     }
 }

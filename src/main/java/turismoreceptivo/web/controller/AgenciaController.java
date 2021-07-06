@@ -19,10 +19,9 @@ public class AgenciaController {
 	@Autowired
 	private AgenciaService agenciaService;
 	
-	@GetMapping("/login-usuario")
+	@GetMapping("/login-agencia")
 	public ModelAndView iniciarSesion(){
 		ModelAndView mav = new ModelAndView("agencia");
-		//mav.addObject("agencias", agenciaService.iniciarSesion());
 		mav.addObject("title", "Iniciar Sesion");
 		mav.addObject("action", "login");
 		return mav;
@@ -30,7 +29,6 @@ public class AgenciaController {
 	
 	@PostMapping("/login")
 	public RedirectView loguear(@RequestParam String mailUser, @RequestParam String contrasenia){
-		//agenciaService.iniciarSesion(mailUser, contrasenia);
 		return new RedirectView("/agencia");
 	}
 	@GetMapping
@@ -52,11 +50,11 @@ public class AgenciaController {
 	@PostMapping("/guardar")
 	public RedirectView guardar(@RequestParam String legajo, @RequestParam String nombre, @RequestParam String telefono, @RequestParam String direccion, @RequestParam String email, @RequestParam String clave){
 		agenciaService.crear(legajo, nombre, telefono, direccion, email, clave);
-		return new RedirectView("/agencia");
+		return new RedirectView("/index");
 	}
 	
 	@GetMapping("/editar/{legajo}")
-	public ModelAndView editar(@PathVariable Integer legajo){
+	public ModelAndView editar(@PathVariable String legajo){
 		ModelAndView mav = new ModelAndView("registro-agencia");
 		mav.addObject("agencia", agenciaService.buscarPorLegajo(legajo));
 		mav.addObject("title", "Editar Agencia");
@@ -71,7 +69,7 @@ public class AgenciaController {
 	}
 	
 	@PostMapping("/eliminar/{legajo}")
-	public RedirectView eliminar(@PathVariable Integer legajo){
+	public RedirectView eliminar(@PathVariable String legajo){
 		agenciaService.eliminar(legajo);
 		return new RedirectView("/agencia");
 	}

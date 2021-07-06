@@ -37,8 +37,8 @@ public class AgenciaService implements UserDetailsService{
     }
 
     @Transactional
-    public void modificar(String nombre, String telefono, String direccion, String email, String clave) {
-        agenciaRepository.modificar(nombre, telefono, direccion, email, clave);
+    public void modificar(String legajo, String nombre, String telefono, String direccion, String email, String clave) {
+        agenciaRepository.modificar(legajo, nombre, telefono, direccion, email, clave);
     }
 
     @Transactional(readOnly = true)
