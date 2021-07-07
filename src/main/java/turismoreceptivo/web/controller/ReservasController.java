@@ -40,7 +40,7 @@ public class ReservasController {
     }
       @GetMapping("/reservasAgencia")
     public ModelAndView buscarReserva(@RequestParam String legajo){
-        ModelAndView mav = new ModelAndView("reservas");
+        ModelAndView mav = new ModelAndView("reservas-agencia");
         mav.addObject("reservas", reservasService.buscarPorAgenciaId(legajo));
         return mav;
     }
@@ -72,18 +72,18 @@ public class ReservasController {
     public RedirectView guardar(@RequestParam String id, @RequestParam int personas, @RequestParam LocalDateTime fechahorario,
             @RequestParam String idProducto, @RequestParam List<Pasajero> pasajeros, @RequestParam Integer dni, @RequestParam String legajo) {
         reservasService.crearReserva(personas, fechahorario, idProducto, pasajeros, dni, legajo);
-        return new RedirectView("/reserva");
+        return new RedirectView("/reservas");
     }
 
     @PostMapping("/modificar")
     public RedirectView modificar(@RequestParam String id, @RequestParam int personas, @RequestParam LocalDateTime fechahorario) {
         reservasService.modificarReserva(id, personas, fechahorario);
-        return new RedirectView("/reserva");
+        return new RedirectView("/reservas");
     }
 
     @PostMapping("/eliminar/{id}")
     public RedirectView eliminar(@PathVariable String id) throws ErrorService {
         reservasService.eliminarReserva(id);
-        return new RedirectView("/reserva");
+        return new RedirectView("/reservas");
     }
 }
