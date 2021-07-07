@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                         .loginPage("/login-agencia")
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .loginProcessingUrl("/logincheck")
+                        .loginProcessingUrl("/login")
                         .defaultSuccessUrl("/", true)
                         .permitAll()
                 .and()
