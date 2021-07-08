@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header th:fragment="header" class="header">
   <div class="datos">
     <svg id="color_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -22,7 +22,13 @@
       <img class="logo" th:src="@{/img/—Pngtree—vintage argentina flag design_6449776.png}" alt="LOGO" />
     </a>
   </div>
-  <div class="botones">
+  <li sec:authorize="isAuthenticated()">
+    <span th:text="${session.username}" style="color: white;"></span>
+    <form th:action="@{/salir}" method="POST">
+      <button type="submit">Cerrar Sesion</button>
+    </form>
+  </li>
+  <div class="botones" sec:authorize="!isAuthenticated()">
     <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
       aria-expanded="false">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-lock"
@@ -75,7 +81,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="#">Excursiones</a>
+          <a class="nav-link" th:href="@{/Producto/mostrar-todos-producto}">Excursiones</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" th:href="@{/index#quienessomos}">¿Quienes Somos?</a>

@@ -22,9 +22,9 @@ public class ProductoController {
     @Autowired
     private ProductoService productoService;
     
-    @GetMapping
+    @GetMapping("mostrar-todos-producto")
     public ModelAndView mostrarTodosProductos(){
-        ModelAndView mav = new ModelAndView("Producto");
+        ModelAndView mav = new ModelAndView("productos");
         mav.addObject("productos", productoService.buscarTodo());
         return mav;
     }
