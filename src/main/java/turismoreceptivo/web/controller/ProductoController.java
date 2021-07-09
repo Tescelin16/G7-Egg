@@ -22,7 +22,7 @@ public class ProductoController {
     @Autowired
     private ProductoService productoService;
     
-    @GetMapping("mostrar-todos-producto")
+    @GetMapping
     public ModelAndView mostrarTodosProductos(){
         ModelAndView mav = new ModelAndView("productos");
         mav.addObject("productos", productoService.buscarTodo());
@@ -31,14 +31,14 @@ public class ProductoController {
     
     @GetMapping("/mostrar-producto/{id}")
     public ModelAndView mostrarProducto(@PathVariable String id){
-        ModelAndView mav = new ModelAndView("ver-producto");
+        ModelAndView mav = new ModelAndView("producto-individual");
         mav.addObject("producto", productoService.buscarPorId(id));
         return mav;
     }
     
     @GetMapping("/crear")
     public ModelAndView crearProducto(){
-        ModelAndView mav = new ModelAndView("produto-formualario");
+        ModelAndView mav = new ModelAndView("producto-formulario");
         mav.addObject("producto", new Producto());
         mav.addObject("title", "Crear Producto");
         mav.addObject("action", "guardar");
@@ -61,8 +61,8 @@ public class ProductoController {
     }
     
     @PostMapping("/modificar")
-    public RedirectView modificar(@RequestParam String id, @RequestParam String descripcion, @RequestParam String titulo, @RequestParam String ubicacion, @RequestParam String dias, @RequestParam Double duracion) throws ErrorService{
-        productoService.modificarProducto(id, descripcion, titulo, ubicacion, dias, duracion);
+    public RedirectView modificar(@RequestParam String id, @RequestParam String descripcion, @RequestParam String titulo, @RequestParam String ubicacion, @RequestParam String dias, @RequestParam Double duracion, @RequestParam Integer precio) throws ErrorService{
+        productoService.modificarProducto(id, descripcion, titulo, ubicacion, dias, duracion, precio);
         return new RedirectView("/Producto");
     }
     

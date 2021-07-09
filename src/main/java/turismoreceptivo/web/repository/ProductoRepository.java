@@ -14,5 +14,6 @@ public interface ProductoRepository extends JpaRepository<Producto, String>{
     @Query("UPDATE Producto p SET p.descripcion = :descripcion, p.titulo = :titulo, p.ubicacion = :ubicacion, p.dias = :dias, p.duracion = :duracion,"
 			+ " p.precio = :precio WHERE p.id = :id")
     void modificar(@Param("id") String id, @Param("descripcion") String descripcion, @Param("titulo") String titulo, 
-			@Param("ubicacion") String ubicacion, @Param("dias") String dias);
+			@Param("ubicacion") String ubicacion, @Param("dias") String dias, 
+                        @Param("precio") Integer precio, @Param("duracion") Double duracion);
 }

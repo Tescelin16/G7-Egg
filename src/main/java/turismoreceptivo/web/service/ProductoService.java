@@ -60,11 +60,11 @@ public class ProductoService {
 
     @Transactional
     public void modificarProducto(String id, String descripcion, String titulo, String ubicacion,
-             String dias, Double duracion) throws ErrorService {
+             String dias, Double duracion, Integer precio) throws ErrorService {
 
         validacion(descripcion, titulo, ubicacion, dias, duracion);
 
-        pR.modificar(id, descripcion, titulo, ubicacion, dias);
+        pR.modificar(id, descripcion, titulo, ubicacion, dias, precio, duracion);
     }
 
     @Transactional

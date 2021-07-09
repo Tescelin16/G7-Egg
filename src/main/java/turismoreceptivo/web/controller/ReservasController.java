@@ -40,7 +40,7 @@ public class ReservasController {
     }
       @GetMapping("/reservasAgencia")
     public ModelAndView buscarReserva(@RequestParam String legajo){
-        ModelAndView mav = new ModelAndView("reservas-agencia");
+        ModelAndView mav = new ModelAndView("reservas-propia");
         mav.addObject("reservas", reservasService.buscarPorAgenciaId(legajo));
         return mav;
     }

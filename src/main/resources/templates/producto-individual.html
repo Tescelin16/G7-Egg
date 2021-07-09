@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link rel="stylesheet" th:href="@{/css/estilo.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title>producto-administrador</title>
+    <script src="https://kit.fontawesome.com/5b85ec102f.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header th:replace="fragments :: header"></header>
+    <nav th:replace="fragments :: navbar"></nav>
+    <!--header
+    <ul class="nav justify-content-center bg-success sticky-top">
+      <li class="nav-item">
+        <a class="turismo nav-link active" aria-current="page" href="#"
+          >Turismo Receptivo</a
+        >
+      </li>
+      <li class="nav-item">
+        <img th:src="@{/img/logo-turismo.jpg}" width="140px" height="70px" alt="" />
+      </li>
+      <li class="nav-item">
+        <img th:src="@{/img/bander.jpg}" width="140px" height="70px" alt="" />
+      </li>
+      <li class="nav-item">
+        <a class="conoce nav-link" href="#">Conoce mas</a>
+      </li>
+    </ul>
+    carrusel
+    <div
+      id="carouselExampleCaptions"
+      class="carousel slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img th:src="@{/img/mendoza100.jpg}" class="foto1 d-block w-100" alt="..." />
+          <div class="carousel-caption d-none d-md-block">
+            <h1 class="h1foto1">Bienvenidos a los secretos de los caminos</h1>
+            <h3 class="h3foto1">
+              Cada uno de ellos guarda entre las piedras a tus pasos y es asi
+              como nos recuerdan
+            </h3>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img th:src="@{/img/mendoza350.jpg}" class="foto2 d-block w-100" alt="..." />
+          <div class="carousel-caption d-none d-md-block">
+            <h1 class="h1foto2">
+              Te invitamos a seguir las huellas de los primeros excursionistas
+            </h1>
+            <h3 class="h3foto2">
+              Seras testigo de que viajar en el tiempo es posible y te vas a
+              sentir acompañado por la inmensidad
+            </h3>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img th:src="@{/img/mendoza900.jpg}" class="foto3 d-block w-100" alt="..." />
+          <div class="carousel-caption d-none d-md-block">
+            <h1 class="h1foto3">
+              Un viaje que te va a acompañar por el resto de tu vida
+            </h1>
+            <h3 class="h3foto3">
+              Estas experiencias que inauguraron nuestros abuelos hoy seran
+              parte de tus fotografias vivenciales
+            </h3>
+          </div>
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>-->
+    <!--tarjeta-->
+    <div class="titulo">
+        <h1 class="texto-titulo">Valle de Uco</h1>
+    </div>
+    <div class="contenedor container d-flex">
+        <div class="card" style="width: 50rem">
+            <div class="card-body">
+                <h2 class="card-title">Ubicacion :</h2>
+                <h3>
+                    El Valle de Uco es un valle que se encuentra mayoritariamente en la
+                    extensión del departamento Tupungato y al norte del río Tunuyán y
+                    forma parte de los departamentos de, Tupungato, Tunuyán y San
+                    Carlos, en la provincia de Mendoza, Argentina. Cuenta con una
+                    extensión total de 17370 km².
+                </h3>
+                <hr>
+                <h2>Dias:</h2>
+                <h3>Jueves,Viernes,Sabados y Domingos.</h3>
+                <hr>
+                <h2>Duracion:</h2>
+                <h3>6 Horas.</h3>
+                <hr>
+                <h2>Precio:</h2>
+                <h3>$ 4500.</h3>
+            </div>
+        </div>
+        <div class="card" style="width: 50rem">
+            <img th:src="@{/img/ruta-vinos.jpg}" class="card-img-top" alt="..." />
+            <div class="card-body">
+                <h3 class="card-title">Ruta del vino Valle de Uco</h3>
+                <p class="card-text">
+                    “Las montañas y los bellos paisajes del Valle de Uco prepararan
+                    nuestros sentidos para experimentar los característicos sabores y
+                    aromas de estos vinos de altura”. Este Tour de Alta Gama está
+                    diseñado para compartir y disfrutar de un excelente día de Vinos.
+                    Visitaremos algunas de las más importantes y destacadas bodegas de
+                    ésta región. Se propone vivir esta experiencia en grupos reducidos,
+                    integrados por viajeros del vino que comparten el mismo interés por
+                    esta fascinante bebida. De esta manera se puede apreciar cada
+                    detalle de las visitas y como desenlace perfecto a este dinámico
+                    tour un verdadero almuerzo gourmet para degustar.
+                </p>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Reservar
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Reserva</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container mt-5 main">
+                                    <h1 th:text="${title}"></h1>
+                                    <hr class="mb-5 col-xl-12" />
+                                    <form id="formulario" class="needs-validation"
+                                        th:action="@{/reservas/__${action}__}" method="POST" th:object="${reserva}"
+                                        autocomplete="off" novalidate>
+                                        <div class="form-floating mb-3 col-xl-6">
+                                            <select id="personas" class="form-select" aria-label="Elegir cantidad"
+                                                th:field="*{cantPersonas}">
+                                                <option value="" selected>Elegir cantidad de personas para la reserva
+                                                </option>
+                                                <option th:each="reserva : ${cantPersonas}" th:text="|${reserva}|"
+                                                    th:value="${reserva}"></option>
+                                            </select>
+                                            <label for="personas">Cantidad de personas</label>
+                                        </div>
+
+                                        <div>
+                                            <label for="meeting-time">Seleccione fecha y horario de dicho
+                                                evento:</label>
+                                            <input type="datetime-local" id="meeting-time" name="meeting-time"
+                                                th:value="${}" th:field="${fechahorario}" min="2000-01-01T00:00"
+                                                max="2050-12-31T00:00">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button class="btn btn-success" type="submit"
+                                    th:text="${action == 'guardar'} ? 'Crear Reserva' : 'Guardar cambios'"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--footer-->
+    <div class="card text-center mt-4 mb-4">
+        <div class="card-header bg-success">
+            <h3>Turismo Receptivo 2021</h3>
+        </div>
+        <div class="card-body bg-dark">
+            <img th:src="@{/img/bander.jpg}" width="140px" height="70px" alt="" />
+        </div>
+        <div class="card-footer bg-success">
+            <div class="iconos">
+                <i class="facebook fab fa-facebook-square"></i>
+                <i class="twitter fab fa-twitter-square"></i>
+                <i class="insta fab fa-instagram-square"></i>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
