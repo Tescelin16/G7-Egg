@@ -22,7 +22,7 @@
       <img class="logo" th:src="@{/img/—Pngtree—vintage argentina flag design_6449776.png}" alt="LOGO" />
     </a>
   </div>
-  <li sec:authorize="isAuthenticated()">
+  <li sec:authorize="isAuthenticated()" class="inicio">
     <span th:text="${session.username}" style="color: white;"></span>
     <form th:action="@{/salir}" method="POST">
       <button type="submit">Cerrar Sesion</button>

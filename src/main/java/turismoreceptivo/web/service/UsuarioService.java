@@ -106,6 +106,7 @@ public class UsuarioService implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+        String id;
         Usuario usuario = uR.buscarPorNombreDeUsuario(username);
         
         if (usuario == null) {
@@ -116,7 +117,7 @@ public class UsuarioService implements UserDetailsService{
         HttpSession session = attributes.getRequest().getSession(true);
         
         session.setAttribute("username", usuario.getUsername());
-        session.setAttribute("id", usuario.getDni());
+        session.setAttribute("id", String.valueOf(usuario.getDni()));
         
         User user = new User(usuario.getUsername(), usuario.getClave(), Collections.EMPTY_LIST);
         return user;

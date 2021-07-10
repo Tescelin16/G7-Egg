@@ -165,3 +165,10 @@ body {
     font-size: 30px;
     margin-bottom: 40px;
 }
+.inicio{
+  display: flex;
+  flex-wrap: wrap !important;
+  width: 20%;
+  justify-content: space-around;
+  align-items: center !important;
+}

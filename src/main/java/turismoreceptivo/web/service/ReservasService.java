@@ -1,15 +1,14 @@
 
 package turismoreceptivo.web.service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import turismoreceptivo.web.entity.Agencia;
-import turismoreceptivo.web.entity.Pasajero;
 import turismoreceptivo.web.entity.Reserva;
 import turismoreceptivo.web.error.ErrorService;
 import turismoreceptivo.web.repository.AgenciaRepository;
@@ -32,21 +31,18 @@ public class ReservasService {
     private UsuarioRepository usuarioRepository;
     
     @Transactional
-    public void crearReserva(int personas, LocalDateTime fechahorario, String idProducto, List<Pasajero> pasajeros,
-    Integer dni, String legajo){
+    public void crearReserva(Integer personas, Date fechahorario, String idProducto, Integer dni, String legajo){
         Reserva rva=new Reserva();
         rva.setPersonas(personas);
         rva.setFechayhorario(fechahorario);
         rva.setProducto(productoRepository.getById(idProducto));
-        rva.setPasajeros(pasajeros);
         rva.setUsuario(usuarioRepository.getById(dni));
         rva.setAgencia(agenciaRepository.getById(legajo));
-        rva.setAgencia(agenciaRepository.buscarPorLegajo(legajo));
         reservaRepository.save(rva);   
     }
     
     @Transactional
-    public void modificarReserva(String id, int personas, LocalDateTime fechahorario){
+    public void modificarReserva(String id, Integer personas, Date fechahorario){
         reservaRepository.modificar(id, personas, fechahorario);
     }
     
@@ -55,14 +51,14 @@ public class ReservasService {
        return reservaRepository.findAll(); 
     }
 	@Transactional(readOnly = true)
-	public List<String> cantidad(){
-		List<String> cantidadPersonas = new ArrayList<>();
-		cantidadPersonas.add("1");
-		cantidadPersonas.add("2");
-		cantidadPersonas.add("3");
-		cantidadPersonas.add("4");
-		cantidadPersonas.add("5");
-		cantidadPersonas.add("6");
+	public List<Integer> cantidad(){
+		List<Integer> cantidadPersonas = new ArrayList<>();
+		cantidadPersonas.add(1);
+		cantidadPersonas.add(2);
+		cantidadPersonas.add(3);
+		cantidadPersonas.add(4);
+		cantidadPersonas.add(5);
+		cantidadPersonas.add(6);
 		return cantidadPersonas;
 	}
     
@@ -80,7 +76,7 @@ public class ReservasService {
        return reservaRepository.findById(id).orElse(null); 
     }
     @Transactional (readOnly= true)
-    public List<Reserva> buscarPorFecha(LocalDateTime fechahorario){
+    public List<Reserva> buscarPorFecha(Date fechahorario){
         return reservaRepository.buscarPorFecha(fechahorario);
     }
     

@@ -2,6 +2,7 @@ package turismoreceptivo.web.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,10 +21,10 @@ public class Reserva implements Serializable {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
-    private int personas;
+    private Integer personas;
 
     //@Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime fechayhorario;
+    private Date fechayhorario;
 
     private Producto producto;
 

@@ -1,6 +1,6 @@
 package turismoreceptivo.web.repository;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -15,10 +15,10 @@ public interface ReservaRepository extends JpaRepository<Reserva, String> {
 
     @Modifying
     @Query("UPDATE Reserva r SET r.personas = :personas, r.fechayhorario = :fechayhorario WHERE r.id = :id")
-    void modificar(@Param("id") String id, @Param("personas") int personas, @Param("fechayhorario") LocalDateTime fechayhorario);
+    void modificar(@Param("id") String id, @Param("personas") Integer personas, @Param("fechayhorario") Date fechayhorario);
 
     @Query("SELECT r FROM Reserva r WHERE r.fechayhorario = :fechayhorario")
-    List<Reserva> buscarPorFecha(@Param("fechayhorario") LocalDateTime fechayhorario);
+    List<Reserva> buscarPorFecha(@Param("fechayhorario") Date fechayhorario);
 
     @Query("SELECT r FROM Reserva r WHERE r.agencia = :agencia")
     List<Reserva> buscarPorAgencia(@Param("agencia") Agencia agencia);

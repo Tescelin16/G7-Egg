@@ -1,8 +1,10 @@
 package turismoreceptivo.web.controller;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,14 +47,19 @@ public class ReservasController {
         return mav;
     }
 
-    @GetMapping("/crear/{id}")
-    public ModelAndView crearReserva(@PathVariable Integer id, @RequestParam(required = false) String legajo, @RequestParam(required = false) String dni) {
+    @GetMapping("/crear/{idProducto}/{id}")
+    public ModelAndView crearReserva(@PathVariable String idProducto, @PathVariable String id) {
         ModelAndView mav = new ModelAndView("reserva-formulario");
         mav.addObject("reserva", new Reserva());
         mav.addObject("cantPersonas", reservasService.cantidad());
-        mav.addObject("usuario", usuarioService.buscarPorDni(id));
-        mav.addObject("agencia", agenciaService.buscarPorLegajo(legajo));
-        mav.addObject("producto", productoService.buscarPorId(dni));
+        
+        if (agenciaService.buscarPorLegajo(id) != null) {
+          mav.addObject("agencia", agenciaService.buscarPorLegajo(id));  
+        }else{
+            Integer dni = Integer.parseInt(id);
+            mav.addObject("usuario", usuarioService.buscarPorDni(dni));
+        }
+        mav.addObject("producto", productoService.buscarPorId(idProducto));
         mav.addObject("title", "Crear Reserva");
         mav.addObject("action", "guardar");
         return mav;
@@ -69,14 +76,14 @@ public class ReservasController {
     }
 
     @PostMapping("/guardar")
-    public RedirectView guardar(@RequestParam String id, @RequestParam int personas, @RequestParam LocalDateTime fechahorario,
-            @RequestParam String idProducto, @RequestParam List<Pasajero> pasajeros, @RequestParam Integer dni, @RequestParam String legajo) {
-        reservasService.crearReserva(personas, fechahorario, idProducto, pasajeros, dni, legajo);
+    public RedirectView guardar(@RequestParam String id, @RequestParam Integer personas, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechahorario,
+            @RequestParam String idProducto, @RequestParam Integer dni, @RequestParam String legajo) {
+        reservasService.crearReserva(personas, fechahorario, idProducto, dni, legajo);
         return new RedirectView("/reservas");
     }
 
     @PostMapping("/modificar")
-    public RedirectView modificar(@RequestParam String id, @RequestParam int personas, @RequestParam LocalDateTime fechahorario) {
+    public RedirectView modificar(@RequestParam String id, @RequestParam Integer personas, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechahorario) {
         reservasService.modificarReserva(id, personas, fechahorario);
         return new RedirectView("/reservas");
     }
