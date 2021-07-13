@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import turismoreceptivo.web.entity.Agencia;
+import turismoreceptivo.web.entity.Producto;
 import turismoreceptivo.web.entity.Reserva;
 import turismoreceptivo.web.entity.Usuario;
 import turismoreceptivo.web.error.ErrorService;
@@ -33,7 +34,7 @@ public class ReservasService {
     
     @Transactional
     public void crearReserva(Integer personas, Date fechahorario, String idProducto, String idSession){
-        Reserva rva=new Reserva();
+        Reserva rva = new Reserva();
         rva.setPersonas(personas);
         rva.setFechayhorario(fechahorario);
         rva.setProducto(productoRepository.getById(idProducto));
@@ -58,7 +59,7 @@ public class ReservasService {
        return reservaRepository.findAll(); 
     }
 	@Transactional(readOnly = true)
-	public List<Integer> cantidad(){
+	public List<Integer> cantidadUsuario(){
 		List<Integer> cantidadPersonas = new ArrayList<>();
 		cantidadPersonas.add(1);
 		cantidadPersonas.add(2);
@@ -66,6 +67,31 @@ public class ReservasService {
 		cantidadPersonas.add(4);
 		cantidadPersonas.add(5);
 		cantidadPersonas.add(6);
+		return cantidadPersonas;
+	}
+	@Transactional(readOnly = true)
+	public List<Integer> cantidadAgencia(){
+		List<Integer> cantidadPersonas = new ArrayList<>();
+		cantidadPersonas.add(1);
+		cantidadPersonas.add(2);
+		cantidadPersonas.add(3);
+		cantidadPersonas.add(4);
+		cantidadPersonas.add(5);
+		cantidadPersonas.add(6);
+		cantidadPersonas.add(7);
+		cantidadPersonas.add(8);
+		cantidadPersonas.add(9);
+		cantidadPersonas.add(10);
+		cantidadPersonas.add(11);
+		cantidadPersonas.add(12);
+		cantidadPersonas.add(13);
+		cantidadPersonas.add(14);
+		cantidadPersonas.add(16);
+		cantidadPersonas.add(16);
+		cantidadPersonas.add(17);
+		cantidadPersonas.add(18);
+		cantidadPersonas.add(19);
+		cantidadPersonas.add(20);
 		return cantidadPersonas;
 	}
     
@@ -100,4 +126,33 @@ public class ReservasService {
     public List<Reserva> buscarPorAgenciaId (String legajo){
         return reservaRepository.buscarPorAgenciaId(legajo);
     }
+	@Transactional (readOnly= true)
+    public List<Reserva> buscarPorUsuarioId (Integer dni){
+        return reservaRepository.buscarPorUsuarioId(dni);
+    }
+	
+	@Transactional (readOnly = true)
+	public Agencia objetoAgencia(String idSession){
+		Agencia ag = new Agencia();
+		if (agenciaRepository.findById(idSession).isPresent()) {
+            Agencia agencia = agenciaRepository.findById(idSession).get();
+			ag = agencia;
+        }
+		return ag;
+	}
+	@Transactional (readOnly = true)
+	public Usuario objetoUsuario(String idSession){
+		Usuario us = new Usuario();
+		if (agenciaRepository.findById(idSession).isPresent()) {
+			Integer dni = Integer.parseInt(idSession);
+            Usuario usuario = usuarioRepository.findById(dni).get();
+			us = usuario;
+        }
+		return us;
+	}
+	@Transactional (readOnly = true)
+	public Producto objetoProducto(String idProducto){
+		Producto producto = productoRepository.findById(idProducto).orElse(null);
+		return producto;
+	}
 }

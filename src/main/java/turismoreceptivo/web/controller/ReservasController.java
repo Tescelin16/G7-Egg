@@ -12,8 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+import turismoreceptivo.web.entity.Agencia;
+import turismoreceptivo.web.entity.Producto;
 import turismoreceptivo.web.entity.Reserva;
+import turismoreceptivo.web.entity.Usuario;
 import turismoreceptivo.web.error.ErrorService;
+import turismoreceptivo.web.repository.AgenciaRepository;
+import turismoreceptivo.web.repository.ProductoRepository;
+import turismoreceptivo.web.repository.UsuarioRepository;
+import turismoreceptivo.web.service.EmailService;
 import turismoreceptivo.web.service.ProductoService;
 import turismoreceptivo.web.service.ReservasService;
 
@@ -25,6 +32,8 @@ public class ReservasController {
     private ReservasService reservasService;
     @Autowired
     private ProductoService productoService;
+	@Autowired
+	private EmailService emailService;
 
      @GetMapping
     public ModelAndView listarReservas(){
@@ -32,19 +41,32 @@ public class ReservasController {
         mav.addObject("reservas", reservasService.listarReservas());
         return mav;
     }
-      @GetMapping("/reservasAgencia")
+      @GetMapping("/reservasPropia")
     public ModelAndView buscarReserva(HttpSession session){
         ModelAndView mav = new ModelAndView("reservas-propia");
+		String idSession = (String) session.getAttribute("id");
+        if (reservasService.objetoAgencia(idSession) != null) {
+            Agencia agencia = reservasService.objetoAgencia(idSession);
+			mav.addObject("reservas", reservasService.buscarPorAgenciaId(agencia.getLegajo()));
+        }else{
+            Usuario usuario = reservasService.objetoUsuario(idSession);
+			mav.addObject("reservas", reservasService.buscarPorUsuarioId(usuario.getDni()));
+        }
         
-        mav.addObject("reservas", reservasService.buscarPorAgenciaId(legajo));
         return mav;
     }
 
     @GetMapping("/crear/{idProducto}/{id}")
-    public ModelAndView crearReserva(@PathVariable String idProducto, @PathVariable String id) {
+    public ModelAndView crearReserva(@PathVariable String idProducto, @PathVariable String id, HttpSession session) {
+		String idSession = (String) session.getAttribute("id");
         ModelAndView mav = new ModelAndView("reserva-formulario");
         mav.addObject("reserva", new Reserva());
-        mav.addObject("cantPersonas", reservasService.cantidad());
+		if (reservasService.objetoAgencia(idSession) != null) {
+			mav.addObject("cantPersonas", reservasService.cantidadAgencia());
+		}
+		else{
+			mav.addObject("cantPersonas", reservasService.cantidadUsuario());
+		}
         mav.addObject("producto", productoService.buscarPorId(idProducto));
         mav.addObject("title", "Crear Reserva");
         mav.addObject("action", "guardar");
@@ -52,10 +74,16 @@ public class ReservasController {
     }
 
     @GetMapping("/editar/{id}")
-    public ModelAndView editarReserva(@PathVariable String id) {
+    public ModelAndView editarReserva(@PathVariable String id, HttpSession session) {
+		String idSession = (String) session.getAttribute("id");
         ModelAndView mav = new ModelAndView("reserva-formulario");
         mav.addObject("reserva", reservasService.buscarPorId(id));
-        mav.addObject("cantPersonas", reservasService.cantidad());
+		if (reservasService.objetoAgencia(idSession) != null) {
+			mav.addObject("cantPersonas", reservasService.cantidadAgencia());
+		}
+		else{
+			mav.addObject("cantPersonas", reservasService.cantidadUsuario());
+		}
         mav.addObject("title", "Editar Agencia");
         mav.addObject("action", "modificar");
         return mav;
@@ -65,7 +93,22 @@ public class ReservasController {
     public RedirectView guardar(@RequestParam Integer personas, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechahorario,
             @RequestParam String idProducto, HttpSession session) {
         String idSession = (String) session.getAttribute("id");
+		Producto producto = reservasService.objetoProducto(idProducto);
         reservasService.crearReserva(personas, fechahorario, idProducto, idSession);
+		
+		if (reservasService.objetoAgencia(idSession) != null) {
+            Agencia agencia = reservasService.objetoAgencia(idSession);
+			emailService.enviarCorreo(agencia.getEmail(), "Confirmación de reserva realizada", "Usted ha realizado una reserva para el dia "
+				+ fechahorario + " a las 13 hs para " + personas + " personas."
+						+ "/n La reserva es para la excursion " + producto.getTitulo() + " con un valor de: $" + producto.getPrecio());
+        }else{
+            Usuario usuario = reservasService.objetoUsuario(idSession);
+			emailService.enviarCorreo(usuario.getEmail(), "Confirmación de reserva realizada", "Usted ha realizado una reserva para el dia "
+				+ fechahorario + " a las 13 hs para " + personas + " personas."
+						+ "/n La reserva es para la excursion " + producto.getTitulo() + " con un valor de: $" + producto.getPrecio());
+        }
+		
+		
         return new RedirectView("/reservas");
     }
 
