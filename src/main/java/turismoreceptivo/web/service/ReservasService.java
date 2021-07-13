@@ -1,4 +1,3 @@
-
 package turismoreceptivo.web.service;
 
 import java.util.ArrayList;
@@ -18,11 +17,9 @@ import turismoreceptivo.web.repository.ProductoRepository;
 import turismoreceptivo.web.repository.ReservaRepository;
 import turismoreceptivo.web.repository.UsuarioRepository;
 
-
-
 @Service
 public class ReservasService {
-     
+
     @Autowired
     private ReservaRepository reservaRepository;
     @Autowired
@@ -31,9 +28,9 @@ public class ReservasService {
     private AgenciaRepository agenciaRepository;
     @Autowired
     private UsuarioRepository usuarioRepository;
-    
+
     @Transactional
-    public void crearReserva(Integer personas, Date fechahorario, String idProducto, String idSession){
+    public void crearReserva(Integer personas, Date fechahorario, String idProducto, String idSession) {
         Reserva rva = new Reserva();
         rva.setPersonas(personas);
         rva.setFechayhorario(fechahorario);
@@ -41,118 +38,126 @@ public class ReservasService {
         if (agenciaRepository.findById(idSession).isPresent()) {
             Agencia agencia = agenciaRepository.findById(idSession).get();
             rva.setAgencia(agencia);
-        }else{
+        } else {
             Integer dni = Integer.parseInt(idSession);
             Usuario usuario = usuarioRepository.findById(dni).get();
             rva.setUsuario(usuario);
         }
-        reservaRepository.save(rva);   
+        reservaRepository.save(rva);
     }
-    
+
     @Transactional
-    public void modificarReserva(String id, Integer personas, Date fechahorario){
+    public void modificarReserva(String id, Integer personas, Date fechahorario) {
         reservaRepository.modificar(id, personas, fechahorario);
     }
-    
-    @Transactional (readOnly= true)
-    public List<Reserva> listarReservas(){
-       return reservaRepository.findAll(); 
+
+    @Transactional(readOnly = true)
+    public List<Reserva> listarReservas() {
+        return reservaRepository.findAll();
     }
-	@Transactional(readOnly = true)
-	public List<Integer> cantidadUsuario(){
-		List<Integer> cantidadPersonas = new ArrayList<>();
-		cantidadPersonas.add(1);
-		cantidadPersonas.add(2);
-		cantidadPersonas.add(3);
-		cantidadPersonas.add(4);
-		cantidadPersonas.add(5);
-		cantidadPersonas.add(6);
-		return cantidadPersonas;
-	}
-	@Transactional(readOnly = true)
-	public List<Integer> cantidadAgencia(){
-		List<Integer> cantidadPersonas = new ArrayList<>();
-		cantidadPersonas.add(1);
-		cantidadPersonas.add(2);
-		cantidadPersonas.add(3);
-		cantidadPersonas.add(4);
-		cantidadPersonas.add(5);
-		cantidadPersonas.add(6);
-		cantidadPersonas.add(7);
-		cantidadPersonas.add(8);
-		cantidadPersonas.add(9);
-		cantidadPersonas.add(10);
-		cantidadPersonas.add(11);
-		cantidadPersonas.add(12);
-		cantidadPersonas.add(13);
-		cantidadPersonas.add(14);
-		cantidadPersonas.add(16);
-		cantidadPersonas.add(16);
-		cantidadPersonas.add(17);
-		cantidadPersonas.add(18);
-		cantidadPersonas.add(19);
-		cantidadPersonas.add(20);
-		return cantidadPersonas;
-	}
-    
+
+    @Transactional(readOnly = true)
+    public List<Integer> cantidadUsuario() {
+        List<Integer> cantidadPersonas = new ArrayList<>();
+        cantidadPersonas.add(1);
+        cantidadPersonas.add(2);
+        cantidadPersonas.add(3);
+        cantidadPersonas.add(4);
+        cantidadPersonas.add(5);
+        cantidadPersonas.add(6);
+        return cantidadPersonas;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Integer> cantidadAgencia() {
+        List<Integer> cantidadPersonas = new ArrayList<>();
+        cantidadPersonas.add(1);
+        cantidadPersonas.add(2);
+        cantidadPersonas.add(3);
+        cantidadPersonas.add(4);
+        cantidadPersonas.add(5);
+        cantidadPersonas.add(6);
+        cantidadPersonas.add(7);
+        cantidadPersonas.add(8);
+        cantidadPersonas.add(9);
+        cantidadPersonas.add(10);
+        cantidadPersonas.add(11);
+        cantidadPersonas.add(12);
+        cantidadPersonas.add(13);
+        cantidadPersonas.add(14);
+        cantidadPersonas.add(16);
+        cantidadPersonas.add(16);
+        cantidadPersonas.add(17);
+        cantidadPersonas.add(18);
+        cantidadPersonas.add(19);
+        cantidadPersonas.add(20);
+        return cantidadPersonas;
+    }
+
     @Transactional
-    public void eliminarReserva (String id) throws ErrorService{
-        Optional<Reserva> resp=reservaRepository.findById(id);
-        if (resp.isPresent()){
+    public void eliminarReserva(String id) throws ErrorService {
+        Optional<Reserva> resp = reservaRepository.findById(id);
+        if (resp.isPresent()) {
             reservaRepository.deleteById(id);
-        }else{
-           throw new ErrorService("La reserva no fue encontrada");
+        } else {
+            throw new ErrorService("La reserva no fue encontrada");
         }
     }
-    @Transactional (readOnly= true)
-    public Reserva buscarPorId(String id){
-       return reservaRepository.findById(id).orElse(null); 
+
+    @Transactional(readOnly = true)
+    public Reserva buscarPorId(String id) {
+        return reservaRepository.findById(id).orElse(null);
     }
-    @Transactional (readOnly= true)
-    public List<Reserva> buscarPorFecha(Date fechahorario){
+
+    @Transactional(readOnly = true)
+    public List<Reserva> buscarPorFecha(Date fechahorario) {
         return reservaRepository.buscarPorFecha(fechahorario);
     }
-    
-    @Transactional (readOnly= true)
-    public List<Reserva> buscarPorAgencia (String legajo){
-        Optional<Agencia> resp=agenciaRepository.findById(legajo);
-        if(resp.isPresent()){
-            Agencia agencia=agenciaRepository.getById(legajo);
+
+    @Transactional(readOnly = true)
+    public List<Reserva> buscarPorAgencia(String legajo) {
+        Optional<Agencia> resp = agenciaRepository.findById(legajo);
+        if (resp.isPresent()) {
+            Agencia agencia = agenciaRepository.getById(legajo);
             return reservaRepository.buscarPorAgencia(agencia);
         }
-    return null;
-}
-    @Transactional (readOnly= true)
-    public List<Reserva> buscarPorAgenciaId (String legajo){
+        return null;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Reserva> buscarPorAgenciaId(String legajo) {
         return reservaRepository.buscarPorAgenciaId(legajo);
     }
-	@Transactional (readOnly= true)
-    public List<Reserva> buscarPorUsuarioId (Integer dni){
+
+    @Transactional(readOnly = true)
+    public List<Reserva> buscarPorUsuarioId(Integer dni) {
         return reservaRepository.buscarPorUsuarioId(dni);
     }
-	
-	@Transactional (readOnly = true)
-	public Agencia objetoAgencia(String idSession){
-		Agencia ag = new Agencia();
-		if (agenciaRepository.findById(idSession).isPresent()) {
+
+    @Transactional(readOnly = true)
+    public Agencia objetoAgencia(String idSession) {
+        Agencia ag = new Agencia();
+        if (agenciaRepository.findById(idSession).isPresent()) {
             Agencia agencia = agenciaRepository.findById(idSession).get();
-			ag = agencia;
+            ag = agencia;
         }
-		return ag;
-	}
-	@Transactional (readOnly = true)
-	public Usuario objetoUsuario(String idSession){
-		Usuario us = new Usuario();
-		if (agenciaRepository.findById(idSession).isPresent()) {
-			Integer dni = Integer.parseInt(idSession);
+        return ag;
+    }
+
+    @Transactional(readOnly = true)
+    public Usuario objetoUsuario(String idSession) {
+        Usuario us = new Usuario();
+        Integer dni = Integer.parseInt(idSession);
+        if (usuarioRepository.findById(dni).isPresent()) {
             Usuario usuario = usuarioRepository.findById(dni).get();
-			us = usuario;
+            us = usuario;
         }
-		return us;
-	}
-	@Transactional (readOnly = true)
-	public Producto objetoProducto(String idProducto){
-		Producto producto = productoRepository.findById(idProducto).orElse(null);
-		return producto;
-	}
+        return us;
+    }
+
+    @Transactional(readOnly = true)
+    public Producto objetoProducto(String idProducto) {
+        Producto producto = productoRepository.findById(idProducto).orElse(null);
+        return producto;
+    }
 }
