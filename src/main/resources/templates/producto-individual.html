@@ -7,6 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100&display=swap" rel="stylesheet" />
     <link rel="stylesheet" th:href="@{/css/estilo.css}" />
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <title>producto-administrador</title>
@@ -16,9 +20,9 @@
 <body>
     <header th:replace="fragments :: header"></header>
     <nav th:replace="fragments :: navbar"></nav>
-  
-    <div class="titulo"  th:object="${producto}" autocomplete="off" novalidate>
-      <input type="hidden" th:field="*{id}"/>
+
+    <div class="titulo" th:object="${producto}" autocomplete="off" novalidate>
+        <input type="hidden" th:field="*{idProducto}" />
         <h1 class="texto-titulo">Valle de Uco</h1>
     </div>
     <div class="contenedor container d-flex">
@@ -60,29 +64,28 @@
                     tour un verdadero almuerzo gourmet para degustar.
                 </p>
                 <!-- Button trigger modal -->
-                <a type="button" class="btn btn-primary" th:href="@{/reservas/crear/__${producto.id}__/__${session.id}__}">
+                <a type="button" class="btn btn-primary"
+                    th:href="@{/reservas/crear/__${producto.idProducto}__/__${session.id}__}">
                     Reservar
                 </a>
             </div>
         </div>
     </div>
-    <!--footer-->
-    <div class="card text-center mt-4 mb-4">
-        <div class="card-header bg-success">
-            <h3>Turismo Receptivo 2021</h3>
+    <!--footer
+    <footer class="footer py-3 bg-dark fixed-bottom">
+        <div class="container d-flex justify-content-center">
+            <span class="text-muted">&copy; Gaston Avila - 2021</span>
+            <a class="text-decoration-none ms-3 footer-link" href="https://www.linkedin.com/in/gastonavilaok/"
+               target="_blank">
+                <i class="bi bi-linkedin"></i>
+            </a>
         </div>
-        <div class="card-body bg-dark">
-            <img th:src="@{/img/bander.jpg}" width="140px" height="70px" alt="" />
-        </div>
-        <div class="card-footer bg-success">
-            <div class="iconos">
-                <i class="facebook fab fa-facebook-square"></i>
-                <i class="twitter fab fa-twitter-square"></i>
-                <i class="insta fab fa-instagram-square"></i>
-            </div>
-        </div>
-    </div>
+    </footer> -->
+    
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>

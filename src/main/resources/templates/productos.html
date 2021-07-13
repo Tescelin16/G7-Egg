@@ -24,7 +24,7 @@
     <div th:each="producto : ${productos}">
     <section class="section-excursion" th:unless="${productos.isEmpty()}">
         <div class="description-excursion">
-            <a th:href="@{Producto/mostrar-producto/__${producto.id}__}">
+            <a th:href="@{Producto/mostrar-producto/__${producto.idProducto}__}">
                 <h4 class="link-excursion" th:text="${producto.titulo}"></h4>
             </a>
             <h7 class="info-excursion" th:text="|Días: ${producto.dias}|">
@@ -35,8 +35,8 @@
             </h7>
             <p class="parrafo-excursion" th:text="${producto.descripcion}"></p>
             <div class="buttoms-description">
-                <a th:href="@{Producto/mostrar-producto/__${producto.id}__}"><button type="button" class="btn btn-link">+ info</button></a>
-                <a th:href="@{/reservas/crear/__${producto.id}__}"><button type="button" class="btn btn-danger">Reserva</button></a>
+                <a th:href="@{Producto/mostrar-producto/__${producto.idProducto}__}"><button type="button" class="btn btn-link">+ info</button></a>
+                <a th:href="@{/reservas/crear/__${producto.idProducto}__}"><button type="button" class="btn btn-danger">Reserva</button></a>
             </div>
         </div>
         <div class="photo-excursion">
@@ -44,8 +44,8 @@
                     alt="imagen de la excursion"></a>
         </div>
         <div class="buttoms-excursion">
-            <a type="button" class="btn btn-outline-warning" th:href="@{/Producto/editar/__${producto.id}__}">Modificar</a>
-            <form th:action="@{/Producto/eliminar/__${producto.id}__}" method="post">
+            <a type="button" class="btn btn-outline-warning" th:href="@{/Producto/editar/__${producto.idProducto}__}">Modificar</a>
+            <form th:action="@{/Producto/eliminar/__${producto.idProducto}__}" method="post">
                 <button class="btn btn-outline-danger" type="submit">Eliminar</button>
             </form>
         </div>

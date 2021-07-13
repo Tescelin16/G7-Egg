@@ -14,7 +14,7 @@ public class Producto implements Serializable {
 	@Id
 	@GeneratedValue(generator = "uuid")
         @GenericGenerator(name = "uuid", strategy = "uuid2")
-	private String id;
+	private String idProducto;
 	
 	private String descripcion;
 	private String titulo;
@@ -22,5 +22,5 @@ public class Producto implements Serializable {
 	private String dias;
 	private double duracion;
 	private Integer precio;
-	
+        
 }

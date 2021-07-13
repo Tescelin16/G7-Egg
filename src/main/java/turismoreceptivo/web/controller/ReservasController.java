@@ -1,8 +1,7 @@
 package turismoreceptivo.web.controller;
 
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -13,13 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-import turismoreceptivo.web.entity.Pasajero;
 import turismoreceptivo.web.entity.Reserva;
 import turismoreceptivo.web.error.ErrorService;
-import turismoreceptivo.web.service.AgenciaService;
 import turismoreceptivo.web.service.ProductoService;
 import turismoreceptivo.web.service.ReservasService;
-import turismoreceptivo.web.service.UsuarioService;
 
 @Controller
 @RequestMapping("/reservas")
@@ -27,10 +23,6 @@ public class ReservasController {
 
     @Autowired
     private ReservasService reservasService;
-    @Autowired
-    private UsuarioService usuarioService;
-    @Autowired
-    private AgenciaService agenciaService;
     @Autowired
     private ProductoService productoService;
 
@@ -41,8 +33,9 @@ public class ReservasController {
         return mav;
     }
       @GetMapping("/reservasAgencia")
-    public ModelAndView buscarReserva(@RequestParam String legajo){
+    public ModelAndView buscarReserva(HttpSession session){
         ModelAndView mav = new ModelAndView("reservas-propia");
+        
         mav.addObject("reservas", reservasService.buscarPorAgenciaId(legajo));
         return mav;
     }
@@ -52,13 +45,6 @@ public class ReservasController {
         ModelAndView mav = new ModelAndView("reserva-formulario");
         mav.addObject("reserva", new Reserva());
         mav.addObject("cantPersonas", reservasService.cantidad());
-        
-        if (agenciaService.buscarPorLegajo(id) != null) {
-          mav.addObject("agencia", agenciaService.buscarPorLegajo(id));  
-        }else{
-            Integer dni = Integer.parseInt(id);
-            mav.addObject("usuario", usuarioService.buscarPorDni(dni));
-        }
         mav.addObject("producto", productoService.buscarPorId(idProducto));
         mav.addObject("title", "Crear Reserva");
         mav.addObject("action", "guardar");
@@ -76,9 +62,10 @@ public class ReservasController {
     }
 
     @PostMapping("/guardar")
-    public RedirectView guardar(@RequestParam String id, @RequestParam Integer personas, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechahorario,
-            @RequestParam String idProducto, @RequestParam Integer dni, @RequestParam String legajo) {
-        reservasService.crearReserva(personas, fechahorario, idProducto, dni, legajo);
+    public RedirectView guardar(@RequestParam Integer personas, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechahorario,
+            @RequestParam String idProducto, HttpSession session) {
+        String idSession = (String) session.getAttribute("id");
+        reservasService.crearReserva(personas, fechahorario, idProducto, idSession);
         return new RedirectView("/reservas");
     }
 

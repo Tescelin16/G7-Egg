@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import turismoreceptivo.web.entity.Agencia;
 import turismoreceptivo.web.entity.Reserva;
+import turismoreceptivo.web.entity.Usuario;
 import turismoreceptivo.web.error.ErrorService;
 import turismoreceptivo.web.repository.AgenciaRepository;
 import turismoreceptivo.web.repository.ProductoRepository;
@@ -24,20 +25,26 @@ public class ReservasService {
     @Autowired
     private ReservaRepository reservaRepository;
     @Autowired
-    private AgenciaRepository agenciaRepository;
-    @Autowired
     private ProductoRepository productoRepository;
+    @Autowired
+    private AgenciaRepository agenciaRepository;
     @Autowired
     private UsuarioRepository usuarioRepository;
     
     @Transactional
-    public void crearReserva(Integer personas, Date fechahorario, String idProducto, Integer dni, String legajo){
+    public void crearReserva(Integer personas, Date fechahorario, String idProducto, String idSession){
         Reserva rva=new Reserva();
         rva.setPersonas(personas);
         rva.setFechayhorario(fechahorario);
         rva.setProducto(productoRepository.getById(idProducto));
-        rva.setUsuario(usuarioRepository.getById(dni));
-        rva.setAgencia(agenciaRepository.getById(legajo));
+        if (agenciaRepository.findById(idSession).isPresent()) {
+            Agencia agencia = agenciaRepository.findById(idSession).get();
+            rva.setAgencia(agencia);
+        }else{
+            Integer dni = Integer.parseInt(idSession);
+            Usuario usuario = usuarioRepository.findById(dni).get();
+            rva.setUsuario(usuario);
+        }
         reservaRepository.save(rva);   
     }
     

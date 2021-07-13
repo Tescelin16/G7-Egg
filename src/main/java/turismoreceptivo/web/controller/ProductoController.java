@@ -29,10 +29,10 @@ public class ProductoController {
         return mav;
     }
     
-    @GetMapping("/mostrar-producto/{id}")
-    public ModelAndView mostrarProducto(@PathVariable String id){
+    @GetMapping("/mostrar-producto/{idProducto}")
+    public ModelAndView mostrarProducto(@PathVariable String idProducto){
         ModelAndView mav = new ModelAndView("producto-individual");
-        mav.addObject("producto", productoService.buscarPorId(id));
+        mav.addObject("producto", productoService.buscarPorId(idProducto));
         return mav;
     }
     
@@ -51,24 +51,24 @@ public class ProductoController {
         return new RedirectView("/Producto");
     }
     
-    @GetMapping("/editar/{id}")
-    public ModelAndView editarProducto(@PathVariable String id){
+    @GetMapping("/editar/{idProducto}")
+    public ModelAndView editarProducto(@PathVariable String idProducto){
         ModelAndView mav = new ModelAndView("producto-formulario");
-        mav.addObject("producto", productoService.buscarPorId(id));
+        mav.addObject("producto", productoService.buscarPorId(idProducto));
         mav.addObject("title", "Editar Producto");
         mav.addObject("action", "modificar");
         return mav;
     }
     
     @PostMapping("/modificar")
-    public RedirectView modificar(@RequestParam String id, @RequestParam String descripcion, @RequestParam String titulo, @RequestParam String ubicacion, @RequestParam String dias, @RequestParam Double duracion, @RequestParam Integer precio) throws ErrorService{
-        productoService.modificarProducto(id, descripcion, titulo, ubicacion, dias, duracion, precio);
+    public RedirectView modificar(@RequestParam String idProducto, @RequestParam String descripcion, @RequestParam String titulo, @RequestParam String ubicacion, @RequestParam String dias, @RequestParam Double duracion, @RequestParam Integer precio) throws ErrorService{
+        productoService.modificarProducto(idProducto, descripcion, titulo, ubicacion, dias, duracion, precio);
         return new RedirectView("/Producto");
     }
     
-    @PostMapping("/eliminar/{id}")
-    public RedirectView eliminar(@PathVariable String id) throws ErrorService{
-        productoService.eliminar(id);
+    @PostMapping("/eliminar/{idProducto}")
+    public RedirectView eliminar(@PathVariable String idProducto) throws ErrorService{
+        productoService.eliminar(idProducto);
         return new RedirectView("/Producto");
     }
     

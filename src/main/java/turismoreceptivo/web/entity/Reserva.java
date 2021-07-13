@@ -1,14 +1,12 @@
 package turismoreceptivo.web.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -23,18 +21,16 @@ public class Reserva implements Serializable {
 
     private Integer personas;
 
-    //@Temporal(TemporalType.TIMESTAMP)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechayhorario;
 
-    private Producto producto;
-
-    @OneToMany
-    private List<Pasajero> pasajeros;
-
     @ManyToOne
-    private Usuario usuario;
+    private Producto producto;
 
     @ManyToOne
     private Agencia agencia;
+    
+    @ManyToOne
+    private Usuario usuario;
 
 }

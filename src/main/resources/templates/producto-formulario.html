@@ -20,7 +20,7 @@
         <hr class="mb-5 col-xl-12"/>
         <form id="formulario" class="needs-validation" th:action="@{/Producto/__${action}__}" method="POST"
               th:object="${producto}" autocomplete="off" novalidate>
-              <input type="hidden" th:field="*{id}"/>
+              <input type="hidden" th:field="*{idProducto}"/>
             
             <div class="mb-3">
                 <label for="formFile" class="form-label">Elija el archivo para representar el producto</label>

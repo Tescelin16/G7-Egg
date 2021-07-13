@@ -27,23 +27,29 @@
                 <thead class="table-secondary text-center">
                     <tr>
                         <th class="col-md-4 px-md-2" scope="col">Excursión</th>
-                        <th class="col-md-4 px-md-2" scope="col">Fecha/th>
+                        <th class="col-md-4 px-md-2" scope="col">Fecha</th>
                         <th class="col-md-4 px-md-2" scope="col">Cantidad de pasajeros</th>
-                        <th class="col-md-4 px-md-2" scope="col">Usuario</th>
-                        <th class="col-md-4 px-md-2" scope="col">Agencia</th>
+                        <th class="col-md-4 px-md-2" scope="col">Usuario/Agencia</th>
+                        <th class="col-md-4 px-md-2" scope="col">Nombre</th>
                         <th class="col-md-4 px-md-2" scope="col">Precio</th>
                         <th class="col-md-4 px-md-2" scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="reserva : ${reservas}">
-                        <td class="col-md-4 px-md-2" th:text="${reserva.producto}"></td>
+                        <td class="col-md-4 px-md-2" th:text="${reserva.producto.titulo}"></td>
                         <td class="col-md-4 px-md-2" th:text="${reserva.fechayhorario}"></td>
                         <td class="col-md-4 px-md-2" th:text="${reserva.personas}"></td>
-                        <td class="col-md-4 px-md-2" th:text="${reserva.usuario.dni}"></td>
-                        <td class="col-md-4 px-md-2" th:text="${reserva.agencia.legajo}"></td>
                         <td class="col-md-4 px-md-2">
-                            <span th:text="|${reserva.producto.nombre} ${reserva.producto.precio}|"></span>
+                            <span th:if="${reserva.usuario != null}" th:text="${reserva.usuario.dni}"></span>
+                            <span th:if="${reserva.agencia != null}" th:text="${reserva.agencia.legajo}"></span>
+                        </td>
+                        <td class="col-md-4 px-md-2">
+                            <span th:if="${reserva.usuario != null}" th:text="|${reserva.usuario.nombre} ${reserva.usuario.apellido}|"></span>
+                            <span th:if="${reserva.agencia != null}" th:text="${reserva.agencia.nombre}"></span>
+                        </td>
+                        <td class="col-md-4 px-md-2">
+                            <span th:text="${reserva.producto.precio}"></span>
                         </td>
                         <td class="col-md-4 px-md-2 d-flex justify-content-around w-100">
                             <a class="btn btn-secondary btn-sm"
