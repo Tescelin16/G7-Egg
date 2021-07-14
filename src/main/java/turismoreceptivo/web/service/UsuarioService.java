@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,6 +19,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import turismoreceptivo.web.entity.Usuario;
 import turismoreceptivo.web.error.ErrorService;
+import turismoreceptivo.web.repository.RolRepository;
 import turismoreceptivo.web.repository.UsuarioRepository;
 
 @Service
@@ -28,10 +31,15 @@ public class UsuarioService implements UserDetailsService{
     @Autowired
     private BCryptPasswordEncoder encoder;
     
+    @Autowired
+    private RolRepository rolRepository;
+    
     @Transactional
     public void crearUsuario(Integer dni, String nombre, String apellido, String email, String telefono,
-            String telefono2, String alojamiento, Date fechaNacimiento, String username, String clave) throws ErrorService{
-        validacion(dni, nombre, apellido, email, telefono, telefono2, alojamiento, fechaNacimiento, username, clave);
+            String telefono2, String alojamiento, Date fechaNacimiento, String username, 
+            String clave, String rolId) throws ErrorService{
+        validacion(dni, nombre, apellido, email, telefono, telefono2, alojamiento, fechaNacimiento, 
+                username, clave);
         
         Usuario usuario = new Usuario();
         usuario.setDni(dni);
@@ -44,6 +52,7 @@ public class UsuarioService implements UserDetailsService{
         usuario.setFechaNacimiento(fechaNacimiento);
         usuario.setUsername(username);
         usuario.setClave(encoder.encode(clave));
+        usuario.setRol(rolRepository.findById(rolId).orElse(null));
 
         uR.save(usuario);
     }
@@ -84,8 +93,9 @@ public class UsuarioService implements UserDetailsService{
     }
 
     @Transactional
-    public void modificarUsuario(Integer dni, String nombre, String apellido, String email, String telefono, String telefono2, String alojamiento, Date fechaNacimiento) {
-        uR.modificar(dni, nombre, apellido, email, telefono, telefono2, alojamiento, fechaNacimiento);
+    public void modificarUsuario(Integer dni, String nombre, String apellido, String email, String telefono, 
+            String telefono2, String alojamiento, Date fechaNacimiento, String rolId) {
+        uR.modificar(dni, nombre, apellido, email, telefono, telefono2, alojamiento, fechaNacimiento, rolRepository.findById(rolId).orElse(null));
     }
 
     @Transactional(readOnly = true)
@@ -119,7 +129,9 @@ public class UsuarioService implements UserDetailsService{
         session.setAttribute("username", usuario.getUsername());
         session.setAttribute("id", String.valueOf(usuario.getDni()));
         
-        User user = new User(usuario.getUsername(), usuario.getClave(), Collections.EMPTY_LIST);
+        GrantedAuthority rol = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().getNombre());
+        
+        User user = new User(usuario.getUsername(), usuario.getClave(), Collections.singletonList(rol));
         return user;
     }
 

@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import turismoreceptivo.web.entity.Agencia;
 import turismoreceptivo.web.service.AgenciaService;
+import turismoreceptivo.web.service.RolService;
 
 @Controller
 @RequestMapping("/agencia")
@@ -18,6 +19,9 @@ public class AgenciaController {
 
 	@Autowired
 	private AgenciaService agenciaService;
+        
+        @Autowired
+        private RolService rolService;
 	
 	@GetMapping("/login-agencia")
 	public ModelAndView iniciarSesion(){
@@ -41,6 +45,7 @@ public class AgenciaController {
 	@GetMapping("/crear")
 	public ModelAndView crear(){
 		ModelAndView mav = new ModelAndView("registro-agencia");
+                mav.addObject("roles", rolService.buscarTodos());
 		mav.addObject("agencia", new Agencia());
 		mav.addObject("title", "Crear Agencia");
 		mav.addObject("action", "guardar");
@@ -48,14 +53,17 @@ public class AgenciaController {
 	}
 	
 	@PostMapping("/guardar")
-	public RedirectView guardar(@RequestParam String legajo, @RequestParam String nombre, @RequestParam String telefono, @RequestParam String direccion, @RequestParam String email, @RequestParam String clave){
-		agenciaService.crear(legajo, nombre, telefono, direccion, email, clave);
+	public RedirectView guardar(@RequestParam String legajo, @RequestParam String nombre, 
+                @RequestParam String telefono, @RequestParam String direccion, @RequestParam String email, 
+                @RequestParam String clave, @RequestParam("rol") String rolId){
+		agenciaService.crear(legajo, nombre, telefono, direccion, email, clave, rolId);
 		return new RedirectView("/index");
 	}
 	
 	@GetMapping("/editar/{legajo}")
 	public ModelAndView editar(@PathVariable String legajo){
 		ModelAndView mav = new ModelAndView("registro-agencia");
+                mav.addObject("roles", rolService.buscarTodos());
 		mav.addObject("agencia", agenciaService.buscarPorLegajo(legajo));
 		mav.addObject("title", "Editar Agencia");
 		mav.addObject("action", "modificar");
@@ -63,8 +71,10 @@ public class AgenciaController {
 	}
 	
 	@PostMapping("/modificar")
-	public RedirectView modificar(@RequestParam String legajo, @RequestParam String nombre, @RequestParam String telefono, @RequestParam String direccion, @RequestParam String email, @RequestParam String clave){
-		agenciaService.modificar(legajo, nombre, telefono, direccion, email, clave);
+	public RedirectView modificar(@RequestParam String legajo, @RequestParam String nombre, 
+                @RequestParam String telefono, @RequestParam String direccion, @RequestParam String email, 
+                @RequestParam String clave, @RequestParam("rol") String rolId){
+		agenciaService.modificar(legajo, nombre, telefono, direccion, email, clave, rolId);
 		return new RedirectView("/agencia");
 	}
 	

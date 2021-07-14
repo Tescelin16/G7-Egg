@@ -172,7 +172,7 @@
               >¿Quienes Somos?</a
             >
           </li>
-          <li class="nav-item dropdown">
+          <li sec:authorize="hasRole('ADMIN')" class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
               href="#"

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" dir="ltr" xmlns: th="http://www.thymeleaf.org">
+<html lang="es" dir="ltr" xmlns: th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -70,6 +70,13 @@
                     <input id="fechaNacimiento" class="form-control" type="date" th:field="*{fechaNacimiento}" required/>
                     <label for="fechaNacimiento">Fecha de nacimiento</label>
                     <div class="invalid-feedback">La fecha de nacimiento es obligatoria</div>
+                </div>
+                <div sec:authorize="hasRole('ADMIN')" class="form-floating mb-3 col-xl-6">
+                    <select id="rol" class="form-select" aria-label="Elegir Rol" th:field="*{rol}">
+                        <option value="" selected>Seleccionar Rol</option>
+                        <option th:each="rol : ${roles}" th:text="${rol.nombre}"
+                        th:value="${rol.idRol}"></option>
+                    </select>
                 </div>
                 <div class="row">
                     <div class="col-xl-3">

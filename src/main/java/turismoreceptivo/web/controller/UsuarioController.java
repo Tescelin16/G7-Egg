@@ -1,7 +1,6 @@
 package turismoreceptivo.web.controller;
 
 import java.util.Date;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -15,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import turismoreceptivo.web.entity.Usuario;
 import turismoreceptivo.web.error.ErrorService;
+import turismoreceptivo.web.service.RolService;
 import turismoreceptivo.web.service.UsuarioService;
 
 @Controller
@@ -23,6 +23,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+    
+    @Autowired
+    private RolService rolService;
 
     @GetMapping("/mostrar-usuario")
     public ModelAndView mostrarUsuarios() {
@@ -34,6 +37,7 @@ public class UsuarioController {
     @GetMapping("/registro")
     public ModelAndView registro() {
         ModelAndView mav = new ModelAndView("registro-usuario");
+        mav.addObject("roles", rolService.buscarTodos());
         mav.addObject("usuario", new Usuario());
         mav.addObject("title", "Registrar Usuario");
         mav.addObject("action", "guardar");
@@ -43,6 +47,7 @@ public class UsuarioController {
     @GetMapping("/editar/{dni}")
     public ModelAndView editarUsuario(@PathVariable Integer dni) {
         ModelAndView mav = new ModelAndView("registro-usuario");
+        mav.addObject("roles", rolService.buscarTodos());
         mav.addObject("usuario", usuarioService.buscarPorDni(dni));
         mav.addObject("title", "Editar Usuario");
         mav.addObject("action", "modificar");
@@ -51,8 +56,8 @@ public class UsuarioController {
 
     @PostMapping("/modificar")
     public RedirectView modificarUsuario(@RequestParam Integer dni, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono,
-            @RequestParam String telefono2, @RequestParam String alojamiento, @RequestParam Date fechaNacimiento) {
-        usuarioService.modificarUsuario(dni, nombre, apellido, email, telefono, telefono2, alojamiento, fechaNacimiento);
+            @RequestParam String telefono2, @RequestParam String alojamiento, @RequestParam Date fechaNacimiento, @RequestParam("rol") String rolId) {
+        usuarioService.modificarUsuario(dni, nombre, apellido, email, telefono, telefono2, alojamiento, fechaNacimiento, rolId);
         return new RedirectView("/usuarios");
     }
 
@@ -77,9 +82,9 @@ public class UsuarioController {
 
     @PostMapping("/guardar")
     public RedirectView guardarUsuario(RedirectAttributes attributes, @RequestParam Integer dni, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono,
-            @RequestParam String telefono2, @RequestParam String alojamiento, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento, @RequestParam String username, @RequestParam String clave) {
+            @RequestParam String telefono2, @RequestParam String alojamiento, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento, @RequestParam String username, @RequestParam String clave, @RequestParam("rol") String rolId) {
         try {
-            usuarioService.crearUsuario(dni, nombre, apellido, email, telefono, telefono2, alojamiento, fechaNacimiento, username, clave);
+            usuarioService.crearUsuario(dni, nombre, apellido, email, telefono, telefono2, alojamiento, fechaNacimiento, username, clave, rolId);
             attributes.addFlashAttribute("registroExitoso", "El usuario fue creado con Exito");
         } catch (ErrorService e) {
             attributes.addFlashAttribute("error", e.getMessage());
