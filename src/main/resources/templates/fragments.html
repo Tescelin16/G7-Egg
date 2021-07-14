@@ -52,10 +52,14 @@
         <ul class="dropdown-menu" style="z-index: 30000 !important">
           <li><a class="dropdown-item" th:href="@{/reservas/reservasPropia}">Reservas</a></li>
           <li><a class="dropdown-item" th:href="@{/index/ver-perfil}">Ver Perfil</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <form th:action="@{/salir}" method="POST">
+              <button class="dropdown-item" type="submit">Cerrar Sesion</button> 
+            </form>
+          </li>
         </ul>
-      <form th:action="@{/salir}" method="POST">
-        <button type="submit">Cerrar Sesion</button>
-      </form>
+      
     </li>
     <div class="botones" sec:authorize="!isAuthenticated()">
       <button
