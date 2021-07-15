@@ -7,8 +7,8 @@
     <title>Productos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/css/style3.css}"/>
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style3.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 
 <body>
@@ -22,35 +22,39 @@
         <h5>Todavía no hay productos cargados. <a th:href="@{/Producto/crear}">Cargar Producto.</a></h5>
     </div>
     <div th:each="producto : ${productos}">
-    <section class="section-excursion" th:unless="${productos.isEmpty()}">
-        <div class="description-excursion">
-            <a th:href="@{Producto/mostrar-producto/__${producto.idProducto}__}">
-                <h4 class="link-excursion" th:text="${producto.titulo}"></h4>
-            </a>
-            <h7 class="info-excursion" th:text="|Días: ${producto.dias}|">
-            </h7>
-            <h7 class="info-excursion" th:text="|Duracion: ${producto.duracion}|">
-            </h7>
-            <h7 class="info-excursion" th:text="|Precio: $${producto.precio}|">
-            </h7>
-            <p class="parrafo-excursion" th:text="${producto.descripcion}"></p>
-            <div class="buttoms-description">
-                <a th:href="@{Producto/mostrar-producto/__${producto.idProducto}__}"><button type="button" class="btn btn-link">+ info</button></a>
-                <a sec:authorize="hasRole('USER')" th:href="@{/reservas/crear/__${producto.idProducto}__/__${session.id}__}"><button type="button" class="btn btn-danger">Reserva</button></a>
+        <section class="section-excursion" th:unless="${productos.isEmpty()}">
+            <div class="description-excursion">
+                <a th:href="@{Producto/mostrar-producto/__${producto.idProducto}__}">
+                    <h4 class="link-excursion" th:text="${producto.titulo}"></h4>
+                </a>
+                <h7 class="info-excursion" th:text="|Días: ${producto.dias}|">
+                </h7>
+                <h7 class="info-excursion" th:text="|Duracion: ${producto.duracion}|">
+                </h7>
+                <h7 class="info-excursion" th:text="|Precio: $${producto.precio}|">
+                </h7>
+                <p class="parrafo-excursion" th:text="${producto.descripcion}"></p>
+                <div class="buttoms-description">
+                    <a th:href="@{Producto/mostrar-producto/__${producto.idProducto}__}"><button type="button"
+                            class="btn btn-link">+ info</button></a>
+                    <a sec:authorize="hasRole('USER')"
+                        th:href="@{/reservas/crear/__${producto.idProducto}__/__${session.id}__}"><button type="button"
+                            class="btn btn-danger">Reserva</button></a>
+                </div>
             </div>
-        </div>
-        <div class="photo-excursion">
-            <a href="#IMAGEN"><img class="img-excursion" th:src="@{/img/potre.jpg}"
-                    alt="imagen de la excursion"></a>
-        </div>
-        <div sec:authorize="hasRole('ADMIN')" class="buttoms-excursion">
-            <a type="button" class="btn btn-outline-warning" th:href="@{/Producto/editar/__${producto.idProducto}__}">Modificar</a>
-            <form th:action="@{/Producto/eliminar/__${producto.idProducto}__}" method="post">
-                <button class="btn btn-outline-danger" type="submit">Eliminar</button>
-            </form>
-        </div>
-    </section>
-</div>
+            <div class="photo-excursion">
+                <a href="#IMAGEN"><img class="img-excursion" th:src="@{/img/potre.jpg}"
+                        alt="imagen de la excursion"></a>
+            </div>
+            <div sec:authorize="hasRole('ADMIN')" class="buttoms-excursion">
+                <a type="button" class="btn btn-outline-warning"
+                    th:href="@{/Producto/editar/__${producto.idProducto}__}">Modificar</a>
+                <form th:action="@{/Producto/eliminar/__${producto.idProducto}__}" method="post">
+                    <button class="btn btn-outline-danger" type="submit">Eliminar</button>
+                </form>
+            </div>
+        </section>
+    </div>
 
     <footer th:replace="fragments :: footer"></footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
