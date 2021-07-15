@@ -34,7 +34,7 @@ public class AgenciaService implements UserDetailsService{
 
     @Transactional
     public void crear(String legajo, String nombre, String telefono, String direccion, String email, 
-            String clave, String rolId) {
+            String clave) {
         Agencia agencia = new Agencia();
         agencia.setLegajo(legajo);
         agencia.setNombre(nombre);
@@ -42,6 +42,7 @@ public class AgenciaService implements UserDetailsService{
         agencia.setDireccion(direccion);
         agencia.setEmail(email);
         agencia.setClave(encoder.encode(clave));
+        String rolId = "02";
         agencia.setRol(rolRepository.findById(rolId).orElse(null));
 
         agenciaRepository.save(agencia);

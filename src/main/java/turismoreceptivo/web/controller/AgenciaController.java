@@ -55,8 +55,8 @@ public class AgenciaController {
 	@PostMapping("/guardar")
 	public RedirectView guardar(@RequestParam String legajo, @RequestParam String nombre, 
                 @RequestParam String telefono, @RequestParam String direccion, @RequestParam String email, 
-                @RequestParam String clave, @RequestParam("rol") String rolId){
-		agenciaService.crear(legajo, nombre, telefono, direccion, email, clave, rolId);
+                @RequestParam String clave){
+		agenciaService.crear(legajo, nombre, telefono, direccion, email, clave);
 		return new RedirectView("/index");
 	}
 	

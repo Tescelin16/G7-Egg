@@ -24,8 +24,8 @@ public class RolController {
     }
     
     @PostMapping("/guardar")
-    public RedirectView guardar(@RequestParam String nombre){
-        rolService.crear(nombre);
+    public RedirectView guardar(@RequestParam String nombre, @RequestParam String idRol){
+        rolService.crear(nombre, idRol);
         return new RedirectView("/index");
     }
     

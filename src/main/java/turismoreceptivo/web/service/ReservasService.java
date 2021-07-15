@@ -136,23 +136,13 @@ public class ReservasService {
 
     @Transactional(readOnly = true)
     public Agencia objetoAgencia(String idSession) {
-        Agencia ag = new Agencia();
-        if (agenciaRepository.findById(idSession).isPresent()) {
-            Agencia agencia = agenciaRepository.findById(idSession).get();
-            ag = agencia;
-        }
-        return ag;
+        return agenciaRepository.findById(idSession).orElse(null);
     }
 
     @Transactional(readOnly = true)
     public Usuario objetoUsuario(String idSession) {
-        Usuario us = new Usuario();
         Integer dni = Integer.parseInt(idSession);
-        if (usuarioRepository.findById(dni).isPresent()) {
-            Usuario usuario = usuarioRepository.findById(dni).get();
-            us = usuario;
-        }
-        return us;
+        return usuarioRepository.findById(dni).orElse(null);
     }
 
     @Transactional(readOnly = true)

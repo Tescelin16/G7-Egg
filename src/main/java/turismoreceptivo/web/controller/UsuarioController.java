@@ -55,8 +55,10 @@ public class UsuarioController {
     }
 
     @PostMapping("/modificar")
-    public RedirectView modificarUsuario(@RequestParam Integer dni, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono,
-            @RequestParam String telefono2, @RequestParam String alojamiento, @RequestParam Date fechaNacimiento, @RequestParam("rol") String rolId) {
+    public RedirectView modificarUsuario(@RequestParam Integer dni, @RequestParam String nombre, 
+            @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono,
+            @RequestParam String telefono2, @RequestParam String alojamiento, 
+            @RequestParam Date fechaNacimiento, @RequestParam("rol") String rolId) {
         usuarioService.modificarUsuario(dni, nombre, apellido, email, telefono, telefono2, alojamiento, fechaNacimiento, rolId);
         return new RedirectView("/usuarios");
     }
@@ -81,8 +83,11 @@ public class UsuarioController {
     }
 
     @PostMapping("/guardar")
-    public RedirectView guardarUsuario(RedirectAttributes attributes, @RequestParam Integer dni, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono,
-            @RequestParam String telefono2, @RequestParam String alojamiento, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento, @RequestParam String username, @RequestParam String clave, @RequestParam("rol") String rolId) {
+    public RedirectView guardarUsuario(RedirectAttributes attributes, @RequestParam Integer dni, 
+            @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, 
+            @RequestParam String telefono, @RequestParam String telefono2, @RequestParam String alojamiento, 
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento, 
+            @RequestParam String username, @RequestParam String clave, @RequestParam(value = "rol", required = false) String rolId) {
         try {
             usuarioService.crearUsuario(dni, nombre, apellido, email, telefono, telefono2, alojamiento, fechaNacimiento, username, clave, rolId);
             attributes.addFlashAttribute("registroExitoso", "El usuario fue creado con Exito");

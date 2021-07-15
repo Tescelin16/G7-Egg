@@ -104,7 +104,7 @@ public class ReservasController {
                     + "/n La reserva es para la excursion " + producto.getTitulo() + " con un valor de: $" + producto.getPrecio());
         }
 
-        return new RedirectView("/reservas");
+        return new RedirectView("/reservas/reservasPropia");
     }
 
     @PostMapping("/modificar")

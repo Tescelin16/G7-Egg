@@ -36,14 +36,14 @@
             <p class="parrafo-excursion" th:text="${producto.descripcion}"></p>
             <div class="buttoms-description">
                 <a th:href="@{Producto/mostrar-producto/__${producto.idProducto}__}"><button type="button" class="btn btn-link">+ info</button></a>
-                <a th:href="@{/reservas/crear/__${producto.idProducto}__}"><button type="button" class="btn btn-danger">Reserva</button></a>
+                <a sec:authorize="hasRole('USER')" th:href="@{/reservas/crear/__${producto.idProducto}__/__${session.id}__}"><button type="button" class="btn btn-danger">Reserva</button></a>
             </div>
         </div>
         <div class="photo-excursion">
             <a href="#IMAGEN"><img class="img-excursion" th:src="@{/img/potre.jpg}"
                     alt="imagen de la excursion"></a>
         </div>
-        <div class="buttoms-excursion">
+        <div sec:authorize="hasRole('ADMIN')" class="buttoms-excursion">
             <a type="button" class="btn btn-outline-warning" th:href="@{/Producto/editar/__${producto.idProducto}__}">Modificar</a>
             <form th:action="@{/Producto/eliminar/__${producto.idProducto}__}" method="post">
                 <button class="btn btn-outline-danger" type="submit">Eliminar</button>

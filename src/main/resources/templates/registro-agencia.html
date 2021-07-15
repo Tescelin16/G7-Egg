@@ -49,17 +49,10 @@
                     <label for="email">Email</label>
                     <div class="invalid-feedback">El email es obligatorio</div>
                 </div>
-                <div sec:authorize="hasRole('ADMIN')" class="form-floating mb-3 col-xl-6">
-                    <select id="rol" class="form-select" aria-label="Elegir Rol" th:field="*{rol}">
-                        <option value="a6a62d8b-755a-49c4-9798-79bd3013ead9" selected>Seleccione el Rol</option>
-                        <option th:each="rol : ${roles}" th:text="${rol.nombre}"
-                        th:value="${rol.idRol}"></option>
-                    </select>
-                </div>
                 <div class="row">
                     <div class="col-xl-3">
                         <button class="btn btn-success" type="submit"
-                                th:text="${action == 'guardar'} ? 'Crear usuario' : 'Guardar cambios'"></button>
+                                th:text="${action == 'guardar'} ? 'Crear agencia' : 'Guardar cambios'"></button>
                     </div>
                 </div>
             </form>

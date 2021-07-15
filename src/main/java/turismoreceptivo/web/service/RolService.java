@@ -14,9 +14,10 @@ public class RolService {
     private RolRepository rolRepository;
     
     @Transactional
-    public void crear(String nombre){
+    public void crear(String nombre, String idRol){
         Rol rol = new Rol();
         rol.setNombre(nombre);
+        rol.setIdRol(idRol);
         rolRepository.save(rol);
     }
     

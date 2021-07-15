@@ -20,34 +20,40 @@
         <h1>Listado de reservas</h1>
         <hr class="mb-5" />
         <div th:if="${reservas.isEmpty()}">
-            <h5>Todavía no hay reservas cargadas en la agencia. <a th:href="@{/reservas/crear}">Cargar reserva.</a></h5>
+            <h5>Todavía no hay reservas cargadas. <a th:href="@{/Producto}">Cargar reserva.</a></h5>
         </div>
         <div th:unless="${reservas.isEmpty()}" class="table-responsive">
             <table class="table table-hover table-sm table-bordered">
                 <thead class="table-secondary text-center">
                     <tr>
-                        <th class="col-md-4 px-md-2" scope="col">Excursión</th>
-                        <th class="col-md-4 px-md-2" scope="col">Fecha/th>
-                        <th class="col-md-4 px-md-2" scope="col">Cantidad de pasajeros</th>
-                        <th class="col-md-4 px-md-2" scope="col">Usuario</th>
-                        <th class="col-md-4 px-md-2" scope="col">Agencia</th>
+                        <th class="col-md-3 px-md-2" scope="col">Excursión</th>
+                        <th class="col-md-2 px-md-2" scope="col">Fecha</th>
+                        <th class="col-md-1 px-md-2" scope="col">Pasajeros</th>
+                        <th class="col-md-1 px-md-2" scope="col">Usuario/Agencia</th>
+                        <th class="col-md-3 px-md-2" scope="col">Nombre</th>
+                        <th class="col-md-1 px-md-2" scope="col">Precio</th>
+                        <th class="col-md-1 px-md-2" scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="reserva : ${reservas}">
-                        <td class="col-md-4 px-md-2" th:text="${reserva.producto}"></td>
-                        <td class="col-md-4 px-md-2" th:text="${reserva.fechayhorario}"></td>
-                        <td class="col-md-4 px-md-2" th:text="${reserva.personas}"></td>
-                        <td class="col-md-4 px-md-2" th:text="${reserva.usuario.dni}"></td>
-                        <td class="col-md-4 px-md-2" th:text="${reserva.agencia.legajo}"></td>
-                        <td class="col-md-4 px-md-2">
-                            <span th:text="|${reserva.producto.nombre} ${reserva.producto.precio}|"></span>
+                        <td class="col-md-3 px-md-2" th:text="${reserva.producto.titulo}"></td>
+                        <td class="col-md-2 px-md-2" th:text="${reserva.fechayhorario}"></td>
+                        <td class="col-md-1 px-md-2" th:text="${reserva.personas}"></td>
+                        <td class="col-md-1 px-md-2">
+                            <span th:if="${reserva.usuario != null}" th:text="${reserva.usuario.dni}"></span>
+                            <span th:if="${reserva.agencia != null}" th:text="${reserva.agencia.legajo}"></span>
                         </td>
-                        <td class="col-md-4 px-md-2 d-flex justify-content-around w-100">
-                            <a class="btn btn-secondary btn-sm"
-                                th:href="@{/reservas/editar/__${reserva.id}__}">Editar</a>
+                        <td class="col-md-3 px-md-2">
+                            <span th:if="${reserva.usuario != null}" th:text="|${reserva.usuario.nombre} ${reserva.usuario.apellido}|"></span>
+                            <span th:if="${reserva.agencia != null}" th:text="${reserva.agencia.nombre}"></span>
+                        </td>
+                        <td class="col-md-1 px-md-2">
+                            <span th:text="${reserva.producto.precio}"></span>
+                        </td>
+                        <td class="col-md-1 px-md-2 d-flex justify-content-around w-100">
                             <form th:action="@{/reservas/eliminar/__${reserva.id}__}" method="post">
-                                <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                                <button class="btn btn-danger btn-sm" type="submit">Cancelar</button>
                             </form>
                         </td>
                     </tr>

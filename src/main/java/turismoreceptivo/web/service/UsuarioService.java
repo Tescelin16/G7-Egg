@@ -52,8 +52,13 @@ public class UsuarioService implements UserDetailsService{
         usuario.setFechaNacimiento(fechaNacimiento);
         usuario.setUsername(username);
         usuario.setClave(encoder.encode(clave));
-        usuario.setRol(rolRepository.findById(rolId).orElse(null));
-
+        if (rolId == null) {
+            rolId="02";
+            usuario.setRol(rolRepository.findById(rolId).orElse(null));
+        }else{
+            usuario.setRol(rolRepository.findById(rolId).orElse(null));
+        }
+        
         uR.save(usuario);
     }
     

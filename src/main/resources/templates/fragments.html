@@ -33,7 +33,7 @@
           d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"
         />
       </svg>
-      <h6 class="size_h6">turismo@receptivo.com</h6>
+      <h6 class="size_h6">turismoreceptivoegg@gmail.com</h6>
     </div>
 
     <div class="logo">
@@ -50,7 +50,8 @@
         <button th:text="${session.username}" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
         </button>
         <ul class="dropdown-menu" style="z-index: 30000 !important">
-          <li><a class="dropdown-item" th:href="@{/reservas/reservasPropia}">Reservas</a></li>
+          <li sec:authorize="hasRole('ADMIN')"><a class="dropdown-item" th:href="@{/reservas}">Reservas</a></li>
+          <li sec:authorize="hasRole('USER')"><a class="dropdown-item" th:href="@{/reservas/reservasPropia}">Reservas</a></li>
           <li><a class="dropdown-item" th:href="@{/index/ver-perfil}">Ver Perfil</a></li>
           <li><hr class="dropdown-divider"></li>
           <li>
@@ -277,15 +278,15 @@
               <i class="bi bi-linkedin linkicons"></i>
             </a>
             <span class="text-muted">&copy; Agustin Leyes |</span>
-            <a class="text-decoration-none ms-3 footer-link espaciado" href="https://www.linkedin.com/in/gastonavilaok/" target="_blank">
+            <a class="text-decoration-none ms-3 footer-link espaciado" href="https://www.linkedin.com/in/agustin-leyes-71a756202/" target="_blank">
               <i class="bi bi-linkedin linkicons"></i>
             </a>
             <span class="text-muted">&copy; Daniel Cocco |</span>
-            <a class="text-decoration-none ms-3 footer-link espaciado" href="https://www.linkedin.com/in/gastonavilaok/" target="_blank">
+            <a class="text-decoration-none ms-3 footer-link espaciado" href="https://www.linkedin.com/in/daniel-cocco-84599279/" target="_blank">
               <i class="bi bi-linkedin linkicons"></i>
             </a>
             <span class="text-muted">&copy; Franco Trintinaglia |</span>
-            <a class="text-decoration-none ms-3 footer-link espaciado" href="https://www.linkedin.com/in/gastonavilaok/" target="_blank">
+            <a class="text-decoration-none ms-3 footer-link espaciado" href="https://www.linkedin.com/in/franco-trintinaglia-505720217/" target="_blank">
               <i class="bi bi-linkedin linkicons"></i>
             </a>
           </div>
