@@ -36,9 +36,9 @@ public class UsuarioService implements UserDetailsService{
     
     @Transactional
     public void crearUsuario(Integer dni, String nombre, String apellido, String email, String telefono,
-            String telefono2, String alojamiento, Date fechaNacimiento, String username, 
+            String telefono2, Date fechaNacimiento, String username, 
             String clave, String rolId) throws ErrorService{
-        validacion(dni, nombre, apellido, email, telefono, telefono2, alojamiento, fechaNacimiento, 
+        validacion(dni, nombre, apellido, email, telefono, telefono2, fechaNacimiento, 
                 username, clave);
         
         Usuario usuario = new Usuario();
@@ -48,7 +48,6 @@ public class UsuarioService implements UserDetailsService{
         usuario.setEmail(email);
         usuario.setTelefono(telefono);
         usuario.setTelefono2(telefono2);
-        usuario.setAlojamiento(alojamiento);
         usuario.setFechaNacimiento(fechaNacimiento);
         usuario.setUsername(username);
         usuario.setClave(encoder.encode(clave));
@@ -63,7 +62,7 @@ public class UsuarioService implements UserDetailsService{
     }
     
     public void validacion(Integer dni, String nombre, String apellido, String email, String telefono,
-            String telefono2, String alojamiento, Date fechaNacimiento, String username, String clave) throws ErrorService{
+            String telefono2, Date fechaNacimiento, String username, String clave) throws ErrorService{
         
         if (dni == null) {
             throw new ErrorService("El dni no puede estar vacio");
@@ -83,9 +82,6 @@ public class UsuarioService implements UserDetailsService{
         if (telefono2 == null || telefono2.isEmpty()) {
             throw new ErrorService("El segundo telefono no puede estar vacio");
         }
-        if (alojamiento == null || alojamiento.isEmpty()) {
-            throw new ErrorService("El alojamiento no puede estar vacio");
-        }
         if (fechaNacimiento == null) {
             throw new ErrorService("La fecha de nacimiento no puede estar vacio");
         }
@@ -99,8 +95,8 @@ public class UsuarioService implements UserDetailsService{
 
     @Transactional
     public void modificarUsuario(Integer dni, String nombre, String apellido, String email, String telefono, 
-            String telefono2, String alojamiento, Date fechaNacimiento, String rolId) {
-        uR.modificar(dni, nombre, apellido, email, telefono, telefono2, alojamiento, fechaNacimiento, rolRepository.findById(rolId).orElse(null));
+            String telefono2, Date fechaNacimiento, String rolId) {
+        uR.modificar(dni, nombre, apellido, email, telefono, telefono2, fechaNacimiento, rolRepository.findById(rolId).orElse(null));
     }
 
     @Transactional(readOnly = true)

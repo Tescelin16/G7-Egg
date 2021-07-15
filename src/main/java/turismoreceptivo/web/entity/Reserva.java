@@ -20,7 +20,7 @@ public class Reserva implements Serializable {
     private String id;
 
     private Integer personas;
-
+    private String alojamiento;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechayhorario;
 

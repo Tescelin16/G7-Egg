@@ -31,7 +31,7 @@
                         <th class="col-md-1 px-md-2" scope="col">Pasajeros</th>
                         <th class="col-md-1 px-md-2" scope="col">Usuario/Agencia</th>
                         <th class="col-md-3 px-md-2" scope="col">Nombre</th>
-                        <th class="col-md-1 px-md-2" scope="col">Precio</th>
+                        <th class="col-md-1 px-md-2" scope="col">Alojamiento</th>
                         <th class="col-md-1 px-md-2" scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -49,7 +49,7 @@
                             <span th:if="${reserva.agencia != null}" th:text="${reserva.agencia.nombre}"></span>
                         </td>
                         <td class="col-md-1 px-md-2">
-                            <span th:text="${reserva.producto.precio}"></span>
+                            <span th:text="${reserva.alojamiento}"></span>
                         </td>
                         <td class="col-md-1 px-md-2 d-flex justify-content-around w-100">
                             <a class="btn btn-warning btn-sm"
