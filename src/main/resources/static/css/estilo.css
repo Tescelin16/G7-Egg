@@ -1,59 +1,74 @@
 * {
-    margin: 0px;
-    padding: 0px;
-  }
-  .turismo {
-    font-size: 30px;
-    margin-right: 100px;
-    color: antiquewhite;
-  }
-  .conoce {
-    font-size: 30px;
-    margin-left: 100px;
-    color: antiquewhite;
-  }
-  .h1foto1 {
-    font-size: 80px;
-    margin-bottom: 400px;
-  }
-  .h3foto1 {
-    margin-bottom: 200px;
-  }
-  .h1foto2 {
-    font-size: 80px;
-    margin-bottom: 400px;
-  }
-  .h3foto2 {
-    margin-bottom: 200px;
-  }
-  .h1foto3 {
-    font-size: 80px;
-    margin-bottom: 400px;
-  }
-  .h3foto3 {
-    margin-bottom: 200px;
-  }
-  .texto-titulo {
-      display: flex;
-      justify-content: center;
-      margin-top: 30px;
-      margin-bottom: 30px;
-      font-size: 80px;
-      background-color: gray;
-  }
-  .contenedor {
-      margin-top: 30px;
-  }
-  .facebook {
-      font-size: 40px;
-  }
-  .twitter {
-      font-size:40px ;
-  }
-  .insta {
-      font-size: 40px;
-  }
-  .iconos {
-      display: flex;
-      justify-content: space-evenly;
-  }
+  margin: 0px;
+  padding: 0px;
+}
+
+.turismo {
+  font-size: 30px;
+  margin-right: 100px;
+  color: antiquewhite;
+}
+
+.conoce {
+  font-size: 30px;
+  margin-left: 100px;
+  color: antiquewhite;
+}
+
+.h1foto1 {
+  font-size: 80px;
+  margin-bottom: 400px;
+}
+
+.h3foto1 {
+  margin-bottom: 200px;
+}
+
+.h1foto2 {
+  font-size: 80px;
+  margin-bottom: 400px;
+}
+
+.h3foto2 {
+  margin-bottom: 200px;
+}
+
+.h1foto3 {
+  font-size: 80px;
+  margin-bottom: 400px;
+}
+
+.h3foto3 {
+  margin-bottom: 200px;
+}
+
+.texto-titulo {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 80px;
+  background-color: #19871c91;
+  border: 7px inset #198754;
+}
+
+.contenedor {
+  margin-top: 30px;
+}
+
+.facebook {
+  font-size: 40px;
+}
+
+.twitter {
+  font-size: 40px;
+}
+
+.insta {
+  font-size: 40px;
+}
+
+.iconos {
+  display: flex;
+  justify-content: space-evenly;
+}
