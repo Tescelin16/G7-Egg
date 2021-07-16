@@ -70,7 +70,7 @@ public class UsuarioController {
 
     @GetMapping("login-usuario")
     public ModelAndView iniciarSesion() {
-        ModelAndView mav = new ModelAndView("login");
+        ModelAndView mav = new ModelAndView("loginnuevo");
         mav.addObject("title", "Iniciar Sesion");
         mav.addObject("action", "login");
         return mav;
