@@ -38,8 +38,7 @@ public class UsuarioService implements UserDetailsService{
     public void crearUsuario(Integer dni, String nombre, String apellido, String email, String telefono,
             String telefono2, Date fechaNacimiento, String username, 
             String clave, String rolId) throws ErrorService{
-        validacion(dni, nombre, apellido, email, telefono, telefono2, fechaNacimiento, 
-                username, clave);
+        validacion(dni, nombre, apellido, email, telefono, telefono2, fechaNacimiento, username, clave);
         
         Usuario usuario = new Usuario();
         usuario.setDni(dni);
@@ -95,7 +94,7 @@ public class UsuarioService implements UserDetailsService{
 
     @Transactional
     public void modificarUsuario(Integer dni, String nombre, String apellido, String email, String telefono, 
-            String telefono2, Date fechaNacimiento, String rolId) {
+            String telefono2, Date fechaNacimiento, String rolId) throws ErrorService{
         uR.modificar(dni, nombre, apellido, email, telefono, telefono2, fechaNacimiento, rolRepository.findById(rolId).orElse(null));
     }
 
@@ -111,7 +110,7 @@ public class UsuarioService implements UserDetailsService{
     }
 
     @Transactional
-    public void eliminar(Integer dni) {
+    public void eliminar(Integer dni) throws ErrorService{
         uR.deleteById(dni);
     }
 
