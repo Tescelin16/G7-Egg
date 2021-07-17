@@ -95,12 +95,12 @@ public class ReservasController {
         if (reservasService.objetoAgencia(idSession) != null) {
             Agencia agencia = reservasService.objetoAgencia(idSession);
             emailService.enviarCorreo(agencia.getEmail(), "Confirmación de reserva realizada", "Usted ha realizado una reserva para el dia "
-                    + fechahorario + " a las 13 hs para " + personas + " personas."
+                    + fechahorario + " a partir de las "+ producto.getHorario()+", para " + personas + " personas."
                     + "/n La reserva es para la excursion " + producto.getTitulo() + " con un valor de: $" + producto.getPrecio());
         } else {
             Usuario usuario = reservasService.objetoUsuario(idSession);
             emailService.enviarCorreo(usuario.getEmail(), "Confirmación de reserva realizada", "Usted ha realizado una reserva para el dia "
-                    + fechahorario + " a las 13 hs para " + personas + " personas."
+                    + fechahorario + "a partir de las "+ producto.getHorario()+", para " +personas + " personas."
                     + "/n La reserva es para la excursion " + producto.getTitulo() + " con un valor de: $" + producto.getPrecio());
         }
 

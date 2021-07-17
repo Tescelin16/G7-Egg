@@ -18,7 +18,7 @@ public class Producto implements Serializable {
 	
 	private String descripcion;
 	private String titulo;
-	private String ubicacion;
+	private String horario;
 	private String dias;
 	private double duracion;
 	private Integer precio;
