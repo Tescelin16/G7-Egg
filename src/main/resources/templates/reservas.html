@@ -19,7 +19,7 @@
     <div class="container mt-5 main">
         <h1>Listado de reservas</h1>
         <hr class="mb-5" />
-        <div th:if="${reservas.isEmpty()}">
+        <div th:if="${reservas.isEmpty()}" style="margin-top: 100px; margin-bottom: 100px;">
             <h5>Todavía no hay reservas cargadas. <a th:href="@{/reservas/crear}">Cargar reserva.</a></h5>
         </div>
         <div th:unless="${reservas.isEmpty()}" class="table-responsive">

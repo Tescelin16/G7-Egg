@@ -17,23 +17,26 @@
 
     <nav th:replace="fragments :: navbar"></nav>
 
-    <h1 class="title">Excursiones generales</h1>
-    <div th:if="${productos.isEmpty()}">
+    <h1 class="title" style="margin-top: 40px; margin-bottom: 40px;">Excursiones generales</h1>
+    <div sec:authorize="hasRole('ADMIN')" th:if="${productos.isEmpty()}" style="text-align: center; margin-top: 100px; margin-bottom: 100px;">
         <h5>Todavía no hay productos cargados. <a th:href="@{/Producto/crear}">Cargar Producto.</a></h5>
+    </div>
+    <div sec:authorize="!isAuthenticated()" th:if="${productos.isEmpty()}" style="text-align: center; margin-top: 100px; margin-bottom: 100px;">
+        <h2> Lo sentimos... No hay excursiones disponibles.</h2>
     </div>
     <div th:each="producto : ${productos}">
         <section class="section-excursion" th:unless="${productos.isEmpty()}">
             <div class="description-excursion">
                 <a th:href="@{Producto/mostrar-producto/__${producto.idProducto}__}">
-                    <h4 class="link-excursion" th:text="${producto.titulo}"></h4>
+                    <h2 class="link-excursion" th:text="${producto.titulo}"></h2>
                 </a>
-                <h7 class="info-excursion" th:text="|Días: ${producto.dias}|">
-                </h7>
-                <h7 class="info-excursion" th:text="|Duracion: ${producto.duracion}|">
-                </h7>
-                <h7 class="info-excursion" th:text="|Precio: $${producto.precio}|">
-                </h7>
-                <p class="parrafo-excursion" th:text="${producto.descripcion}"></p>
+                <h5 class="info-excursion" th:text="|Días: ${producto.dias}|">
+                </h5>
+                <h5 class="info-excursion" th:text="|Duracion: ${producto.duracion} hrs.|">
+                </h5>
+                <h5 class="info-excursion" th:text="|Precio: $${producto.precio}|">
+                </h5>
+                <p class="parrafo-excursion" th:text="|Descripcion: ${producto.descripcion}"></p>
                 <div class="buttoms-description">
                     <a th:href="@{Producto/mostrar-producto/__${producto.idProducto}__}"><button type="button"
                             class="btn btn-link">+ info</button></a>
@@ -44,7 +47,7 @@
             </div>
             <div class="photo-excursion">
                 <a href="#IMAGEN"><img class="img-excursion" th:src="@{/img/potre.jpg}"
-                        alt="imagen de la excursion"></a>
+                        alt="imagen de la excursion" style="margin-left: 20px;"></a>
             </div>
             <div sec:authorize="hasRole('ADMIN')" class="buttoms-excursion">
                 <a type="button" class="btn btn-outline-warning"
