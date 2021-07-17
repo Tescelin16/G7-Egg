@@ -35,14 +35,15 @@ public class UsuarioService implements UserDetailsService{
     private RolRepository rolRepository;
     
     @Transactional
-    public void crearUsuario(Integer dni, String nombre, String apellido, String email, String telefono,
+    public void crearUsuario(String nombre, Integer dni, String apellido, String email, String telefono,
             String telefono2, Date fechaNacimiento, String username, 
             String clave, String rolId) throws ErrorService{
-        validacion(dni, nombre, apellido, email, telefono, telefono2, fechaNacimiento, username, clave);
+        
+        validacion(nombre, dni, apellido, email, telefono, telefono2, fechaNacimiento, username, clave);
         
         Usuario usuario = new Usuario();
-        usuario.setDni(dni);
         usuario.setNombre(nombre);
+        usuario.setDni(dni);
         usuario.setApellido(apellido);
         usuario.setEmail(email);
         usuario.setTelefono(telefono);
@@ -60,14 +61,14 @@ public class UsuarioService implements UserDetailsService{
         uR.save(usuario);
     }
     
-    public void validacion(Integer dni, String nombre, String apellido, String email, String telefono,
+    public void validacion(String nombre, Integer dni, String apellido, String email, String telefono,
             String telefono2, Date fechaNacimiento, String username, String clave) throws ErrorService{
         
-        if (dni == null) {
-            throw new ErrorService("El dni no puede estar vacio");
-        }
         if (nombre == null || nombre.isEmpty()) {
             throw new ErrorService("El nombre no puede estar vacio");
+        }
+         if (dni == null) {
+            throw new ErrorService("El dni no puede estar vacio");
         }
         if (apellido == null || apellido.isEmpty()) {
             throw new ErrorService("El apellido no puede estar vacio");

@@ -14,9 +14,9 @@ public class PrincipalController {
         return new ModelAndView("index");
     }
 
-    @GetMapping("/quienes-somos")
-    public ModelAndView quienesSomos() {
-        return new ModelAndView("quienes-somos");
+    @GetMapping("/error-403")
+    public ModelAndView error() {
+        return new ModelAndView("error");
     }
 
 }

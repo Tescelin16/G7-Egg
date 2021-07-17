@@ -64,8 +64,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                         .logoutSuccessUrl("/index")
                         .deleteCookies("JSESSIONID")
                         .permitAll()
-                .and()
-                    .exceptionHandling().accessDeniedPage("/error-403")
+//                .and()
+//                    .exceptionHandling().accessDeniedPage("/index/error-403")
                 .and()
                     .csrf().disable();
     }

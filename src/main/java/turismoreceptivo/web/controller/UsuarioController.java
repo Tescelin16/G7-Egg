@@ -26,7 +26,7 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
-    
+
     @Autowired
     private RolService rolService;
 
@@ -40,13 +40,11 @@ public class UsuarioController {
     @GetMapping("/registro")
     public ModelAndView registro(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("registro-usuario");
-		Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
-		if (flashMap != null) {
-			mav.addObject("mensaje", flashMap.get("creado"));
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if (flashMap != null) {
+            mav.addObject("mensaje", flashMap.get("mensaje"));
             mav.addObject("error", flashMap.get("error"));
-            mav.addObject("modificado", flashMap.get("modificado"));
-            mav.addObject("eliminado", flashMap.get("eliminado"));
-		}
+        }
         mav.addObject("roles", rolService.buscarTodos());
         mav.addObject("usuario", new Usuario());
         mav.addObject("title", "Registrar Usuario");
@@ -65,12 +63,12 @@ public class UsuarioController {
     }
 
     @PostMapping("/modificar")
-    public RedirectView modificarUsuario(RedirectAttributes attributes, @RequestParam Integer dni, @RequestParam String nombre, 
+    public RedirectView modificarUsuario(RedirectAttributes attributes, @RequestParam Integer dni, @RequestParam String nombre,
             @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono,
-            @RequestParam String telefono2,@RequestParam Date fechaNacimiento, @RequestParam("rol") String rolId) throws ErrorService{
-		try {
+            @RequestParam String telefono2, @RequestParam Date fechaNacimiento, @RequestParam("rol") String rolId) throws ErrorService {
+        try {
             usuarioService.modificarUsuario(dni, nombre, apellido, email, telefono, telefono2, fechaNacimiento, rolId);
-            attributes.addFlashAttribute("modificado", "El usuario fue modificado con Exito");
+            attributes.addFlashAttribute("mensaje", "El usuario fue modificado con Exito");
         } catch (ErrorService e) {
             attributes.addFlashAttribute("error", e.getMessage());
             attributes.addFlashAttribute("dni", dni);
@@ -82,22 +80,21 @@ public class UsuarioController {
             attributes.addFlashAttribute("fechaNacimiento", fechaNacimiento);
             return new RedirectView("/registro-usuario");
         }
-        
+
         return new RedirectView("/index");
     }
 
     @PostMapping("/eliminar/{dni}")
-    public RedirectView eliminarUsuario(@PathVariable Integer dni, RedirectAttributes attributes) throws ErrorService{
-		try {
-			usuarioService.eliminar(dni);
-			attributes.addFlashAttribute("eliminado", "El usuario ha sido eliminado con exito");
-		} catch (ErrorService e) {
-			attributes.addFlashAttribute("error", e.getMessage());
-		}
-        
+    public RedirectView eliminarUsuario(@PathVariable Integer dni, RedirectAttributes attributes) throws ErrorService {
+        try {
+            usuarioService.eliminar(dni);
+            attributes.addFlashAttribute("mensaje", "El usuario ha sido eliminado con exito");
+        } catch (ErrorService e) {
+            attributes.addFlashAttribute("error", e.getMessage());
+        }
+
         return new RedirectView("/usuarios");
     }
-
 
     @GetMapping("login-usuario")
     public ModelAndView iniciarSesion() {
@@ -113,18 +110,19 @@ public class UsuarioController {
     }
 
     @PostMapping("/guardar")
-    public RedirectView guardarUsuario(RedirectAttributes attributes, @RequestParam Integer dni, 
-            @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, 
-            @RequestParam String telefono, @RequestParam String telefono2, 
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento, 
-            @RequestParam String username, @RequestParam String clave, @RequestParam(value = "rol", required = false) String rolId) {
+    public RedirectView guardarUsuario(RedirectAttributes attributes, @RequestParam Integer dni,
+            @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email,
+            @RequestParam String telefono, @RequestParam String telefono2,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento,
+            @RequestParam String username, @RequestParam String clave, @RequestParam(value = "rol", required = false) String rolId) throws ErrorService {
+        
         try {
-            usuarioService.crearUsuario(dni, nombre, apellido, email, telefono, telefono2,fechaNacimiento, username, clave, rolId);
-            attributes.addFlashAttribute("creado", "El usuario fue creado con Exito");
+            usuarioService.crearUsuario(nombre, dni, apellido, email, telefono, telefono2, fechaNacimiento, username, clave, rolId);
+            attributes.addFlashAttribute("mensaje", "El usuario fue creado con Exito");
         } catch (ErrorService e) {
             attributes.addFlashAttribute("error", e.getMessage());
-            attributes.addFlashAttribute("dni", dni);
             attributes.addFlashAttribute("nombre", nombre);
+             attributes.addFlashAttribute("dni", dni);
             attributes.addFlashAttribute("apellido", apellido);
             attributes.addFlashAttribute("email", email);
             attributes.addFlashAttribute("telefono", telefono);
