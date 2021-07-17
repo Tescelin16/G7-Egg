@@ -48,8 +48,8 @@ public class ProductoController {
     }
     
     @PostMapping("/guardar")
-    public RedirectView guardar(@RequestParam String descripcion, @RequestParam String titulo, @RequestParam String ubicacion, @RequestParam String dias, @RequestParam Double duracion, @RequestParam Integer precio) throws ErrorService{
-        productoService.crearProduto(descripcion, titulo, ubicacion, dias, duracion, precio);
+    public RedirectView guardar(@RequestParam String descripcion, @RequestParam String titulo, @RequestParam String horario, @RequestParam String dias, @RequestParam Double duracion, @RequestParam Integer precio) throws ErrorService{
+        productoService.crearProduto(descripcion, titulo, horario, dias, duracion, precio);
         return new RedirectView("/Producto");
     }
     
@@ -63,8 +63,8 @@ public class ProductoController {
     }
     
     @PostMapping("/modificar")
-    public RedirectView modificar(@RequestParam String idProducto, @RequestParam String descripcion, @RequestParam String titulo, @RequestParam String ubicacion, @RequestParam String dias, @RequestParam Double duracion, @RequestParam Integer precio) throws ErrorService{
-        productoService.modificarProducto(idProducto, descripcion, titulo, ubicacion, dias, duracion, precio);
+    public RedirectView modificar(@RequestParam String idProducto, @RequestParam String descripcion, @RequestParam String titulo, @RequestParam String horario, @RequestParam String dias, @RequestParam Double duracion, @RequestParam Integer precio) throws ErrorService{
+        productoService.modificarProducto(idProducto, descripcion, titulo, horario, dias, duracion, precio);
         return new RedirectView("/Producto");
     }
     
