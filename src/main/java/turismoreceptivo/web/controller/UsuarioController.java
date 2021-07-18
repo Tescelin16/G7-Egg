@@ -97,10 +97,12 @@ public class UsuarioController {
     }
 
     @GetMapping("login-usuario")
-    public ModelAndView iniciarSesion() {
+    public ModelAndView iniciarSesion(@RequestParam(required = false) String error) {
         ModelAndView mav = new ModelAndView("loginusuario");
+        if (error != null) {
+            mav.addObject("error", "Usuario o Contraseña incorrecta");
+        }
         mav.addObject("title", "Iniciar Sesion");
-        mav.addObject("action", "login");
         return mav;
     }
 
@@ -115,14 +117,14 @@ public class UsuarioController {
             @RequestParam String telefono, @RequestParam String telefono2,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento,
             @RequestParam String username, @RequestParam String clave, @RequestParam(value = "rol", required = false) String rolId) throws ErrorService {
-        
+
         try {
             usuarioService.crearUsuario(nombre, dni, apellido, email, telefono, telefono2, fechaNacimiento, username, clave, rolId);
             attributes.addFlashAttribute("mensaje", "El usuario fue creado con Exito");
         } catch (ErrorService e) {
             attributes.addFlashAttribute("error", e.getMessage());
             attributes.addFlashAttribute("nombre", nombre);
-             attributes.addFlashAttribute("dni", dni);
+            attributes.addFlashAttribute("dni", dni);
             attributes.addFlashAttribute("apellido", apellido);
             attributes.addFlashAttribute("email", email);
             attributes.addFlashAttribute("telefono", telefono);
@@ -130,7 +132,7 @@ public class UsuarioController {
             attributes.addFlashAttribute("fechaNacimiento", fechaNacimiento);
             attributes.addFlashAttribute("username", username);
             attributes.addFlashAttribute("clave", clave);
-            return new RedirectView("/registro-usuario");
+            return new RedirectView("/registro");
         }
         return new RedirectView("/index");
     }

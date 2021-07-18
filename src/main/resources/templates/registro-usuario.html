@@ -22,7 +22,7 @@
             <form id="formulario" class="needs-validation" th:action="@{/usuarios/__${action}__}" method="POST"
                   th:object="${usuario}" autocomplete="off" novalidate>
                 <div class="form-floating mb-3 col-xl-6">
-                    <input id="dni" class="form-control" type="text" placeholder="Documento" th:field="*{dni}" required
+                    <input id="dni" class="form-control" type="number" placeholder="Documento" th:field="*{dni}" required
                            th:readonly="${usuario.dni != null}"/>
                     <label for="dni">Documento</label>
                     <div class="invalid-feedback">El documento es obligatorio</div>

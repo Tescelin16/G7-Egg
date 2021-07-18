@@ -40,11 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         
         http
                 .authorizeRequests()
-                   .antMatchers("/static/**").permitAll()
                    .antMatchers("/**").permitAll()
                 .and()
                     .formLogin()
-                        .loginPage("/login-usuario")
+                        .loginPage("/usuarios/login-usuario")
                         .usernameParameter("username")
                         .passwordParameter("password")
                         .loginProcessingUrl("/login")
@@ -52,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                         .permitAll()
                 .and()
                     .formLogin()
-                        .loginPage("/login-agencia")
+                        .loginPage("/agencia/login-agencia")
                         .usernameParameter("username")
                         .passwordParameter("password")
                         .loginProcessingUrl("/login")
@@ -64,8 +63,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                         .logoutSuccessUrl("/index")
                         .deleteCookies("JSESSIONID")
                         .permitAll()
-//                .and()
-//                    .exceptionHandling().accessDeniedPage("/index/error-403")
+                .and()
+                    .exceptionHandling().accessDeniedPage("/index/error-403")
                 .and()
                     .csrf().disable();
     }
