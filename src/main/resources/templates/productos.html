@@ -28,17 +28,6 @@
         <section class="section-excursion" th:unless="${productos.isEmpty()}">
             <div class="description-excursion">
                 <a th:href="@{Producto/mostrar-producto/__${producto.idProducto}__}">
-<<<<<<< HEAD
-                    <h4 class="link-excursion" th:text="${producto.titulo}"></h4>
-                </a>
-                <h7 class="info-excursion" th:text="|Días: ${producto.dias}|">
-                </h7>
-                <h7 class="info-excursion" th:text="|Duracion: ${producto.duracion}|">
-                </h7>
-                <h7 class="info-excursion" th:text="|Precio: $${producto.precio}|">
-                </h7>
-                <p class="parrafo-excursion" th:text="${producto.descripcion}"></p>
-=======
                     <h2 class="link-excursion" th:text="${producto.titulo}"></h2>
                 </a>
                 <h5 class="info-excursion" th:text="|Días: ${producto.dias}|">
@@ -48,7 +37,6 @@
                 <h5 class="info-excursion" th:text="|Precio: $${producto.precio}|">
                 </h5>
                 <p class="parrafo-excursion" th:text="|Descripcion: ${producto.descripcion}"></p>
->>>>>>> origin/main
                 <div class="buttoms-description">
                     <a th:href="@{Producto/mostrar-producto/__${producto.idProducto}__}"><button type="button"
                             class="btn btn-link">+ info</button></a>
@@ -59,11 +47,7 @@
             </div>
             <div class="photo-excursion">
                 <a href="#IMAGEN"><img class="img-excursion" th:src="@{/img/potre.jpg}"
-<<<<<<< HEAD
-                        alt="imagen de la excursion"></a>
-=======
                         alt="imagen de la excursion" style="margin-left: 20px;"></a>
->>>>>>> origin/main
             </div>
             <div sec:authorize="hasRole('ADMIN')" class="buttoms-excursion">
                 <a type="button" class="btn btn-outline-warning"
