@@ -58,13 +58,14 @@ public class ReservasController {
     public ModelAndView crearReserva(@PathVariable String idProducto, @PathVariable String id, HttpSession session) {
         String idSession = (String) session.getAttribute("id");
         ModelAndView mav = new ModelAndView("reserva-formulario");
-        mav.addObject("reserva", new Reserva());
+        Reserva reserva=new Reserva();
+        reserva.setProducto(productoService.buscarPorId(idProducto));
+        mav.addObject("reserva", reserva);
         if (reservasService.objetoAgencia(idSession) != null) {
             mav.addObject("cantPersonas", reservasService.cantidadAgencia());
         } else {
             mav.addObject("cantPersonas", reservasService.cantidadUsuario());
         }
-        mav.addObject("producto", productoService.buscarPorId(idProducto));
         mav.addObject("title", "Crear Reserva");
         mav.addObject("action", "guardar");
         return mav;

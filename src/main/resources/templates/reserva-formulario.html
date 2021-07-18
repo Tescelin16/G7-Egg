@@ -23,9 +23,9 @@
         <form id="formulario" class="needs-validation" th:action="@{/reservas/__${action}__}" method="POST"
             th:object="${reserva}" autocomplete="off" novalidate>
             <input type="hidden" th:field="*{id}" />
-            <div th:object="${producto}" autocomplete="off" novalidate>
-                <input type="hidden" th:field="*{idProducto}" />
-            </div>
+            
+                <input type="hidden" th:field="*{producto}" />
+            
 
             <div class="form-floating mb-3 col-xl-6">
                 <select id="personas" class="form-select" aria-label="Elegir cantidad" name="personas">
