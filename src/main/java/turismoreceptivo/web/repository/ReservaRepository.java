@@ -14,8 +14,8 @@ import turismoreceptivo.web.entity.Reserva;
 public interface ReservaRepository extends JpaRepository<Reserva, String> {
 
     @Modifying
-    @Query("UPDATE Reserva r SET r.personas = :personas, r.fechayhorario = :fechayhorario WHERE r.id = :id")
-    void modificar(@Param("id") String id, @Param("personas") Integer personas, @Param("fechayhorario") Date fechayhorario);
+    @Query("UPDATE Reserva r SET r.personas = :personas, r.alojamiento= :alojamiento, r.fechayhorario = :fechayhorario WHERE r.id = :id")
+    void modificar(@Param("id") String id, @Param("personas") Integer personas, @Param("alojamiento")String alojamiento, @Param("fechayhorario") Date fechayhorario);
 
     @Query("SELECT r FROM Reserva r WHERE r.fechayhorario = :fechayhorario")
     List<Reserva> buscarPorFecha(@Param("fechayhorario") Date fechayhorario);

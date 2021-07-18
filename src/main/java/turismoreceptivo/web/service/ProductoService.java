@@ -16,16 +16,16 @@ public class ProductoService {
     private ProductoRepository pR;
 
     @Transactional
-    public void crearProduto(String descripcion, String titulo, String ubicacion,
+    public void crearProduto(String descripcion, String titulo, String horario,
              String dias, Double duracion, Integer precio) throws ErrorService {
 
-        validacion(descripcion, titulo, ubicacion, dias, duracion);
+        validacion(descripcion, titulo, horario, dias, duracion);
 
         Producto producto = new Producto();
 
         producto.setDescripcion(descripcion);
         producto.setTitulo(titulo);
-        producto.setUbicacion(ubicacion);
+        producto.setHorario(horario);
         producto.setDias(dias);
         producto.setDuracion(duracion);
         producto.setPrecio(precio);
@@ -33,7 +33,7 @@ public class ProductoService {
         pR.save(producto);
     }
 
-    public void validacion(String descripcion, String titulo, String ubicacion,
+    public void validacion(String descripcion, String titulo, String horario,
              String dias, Double duracion) throws ErrorService {
 
         if (descripcion == null || descripcion.isEmpty()) {
@@ -44,7 +44,7 @@ public class ProductoService {
             throw new ErrorService("El titulo no puede estar vacio");
         }
 
-        if (ubicacion == null || ubicacion.isEmpty()) {
+        if (horario == null || horario.isEmpty()) {
             throw new ErrorService("La ubicacioón no puede estar vacio");
         }
 
@@ -59,12 +59,12 @@ public class ProductoService {
     }
 
     @Transactional
-    public void modificarProducto(String id, String descripcion, String titulo, String ubicacion,
+    public void modificarProducto(String id, String descripcion, String titulo, String horario,
              String dias, Double duracion, Integer precio) throws ErrorService {
 
-        validacion(descripcion, titulo, ubicacion, dias, duracion);
+        validacion(descripcion, titulo, horario, dias, duracion);
 
-        pR.modificar(id, descripcion, titulo, ubicacion, dias, precio, duracion);
+        pR.modificar(id, descripcion, titulo, horario, dias, precio, duracion);
     }
 
     @Transactional

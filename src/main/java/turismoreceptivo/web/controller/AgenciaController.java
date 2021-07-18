@@ -25,7 +25,7 @@ public class AgenciaController {
 	
 	@GetMapping("/login-agencia")
 	public ModelAndView iniciarSesion(){
-		ModelAndView mav = new ModelAndView("login");
+		ModelAndView mav = new ModelAndView("loginagencia");
 		mav.addObject("title", "Iniciar Sesion");
 		mav.addObject("action", "login");
 		return mav;

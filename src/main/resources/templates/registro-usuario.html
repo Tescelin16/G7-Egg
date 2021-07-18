@@ -17,6 +17,8 @@
         <div class="container mt-5 main">
             <h1 th:text="${title}"></h1>
             <hr class="mb-5 col-xl-12"/>
+            <div th:if="${mensaje != null}" class="alert alert-success" th:text="${mensaje}"></div>
+            <div th:if="${error != null}" class="alert alert-danger" th:text="${error}"></div>
             <form id="formulario" class="needs-validation" th:action="@{/usuarios/__${action}__}" method="POST"
                   th:object="${usuario}" autocomplete="off" novalidate>
                 <div class="form-floating mb-3 col-xl-6">
@@ -47,11 +49,6 @@
                 </div>
 
                 <div class="form-floating mb-3 col-xl-6">
-                    <input id="alojamiento" class="form-control" type="text" placeholder="Alojamiento" th:field="*{alojamiento}" required/>
-                    <label for="alojamiento">Alojamiento</label>
-                    <div class="invalid-feedback">El alojamiento es obligatorio</div>
-                </div>
-                <div class="form-floating mb-3 col-xl-6">
                     <input id="telefono" class="form-control" type="text" placeholder="Telefono" th:field="*{telefono}" required/>
                     <label for="telefono">Telefono</label>
                     <div class="invalid-feedback">El telefono es obligatorio</div>
@@ -81,7 +78,7 @@
                 <div class="row">
                     <div class="col-xl-3">
                         <button class="btn btn-success" type="submit"
-                                th:text="${action == 'guardar'} ? 'Crear usuario' : 'Guardar cambios'"></button>
+                                th:text="${action == 'guardar'} ? 'Crear Usuario' : 'Guardar cambios'"></button>
                     </div>
                 </div>
             </form>

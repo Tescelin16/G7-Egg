@@ -86,21 +86,21 @@ public class ReservasController {
     }
 
     @PostMapping("/guardar")
-    public RedirectView guardar(@RequestParam Integer personas, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechahorario,
+    public RedirectView guardar(@RequestParam Integer personas,@RequestParam String alojamiento, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechahorario,
             @RequestParam String idProducto, HttpSession session) {
         String idSession = (String) session.getAttribute("id");
         Producto producto = reservasService.objetoProducto(idProducto);
-        reservasService.crearReserva(personas, fechahorario, idProducto, idSession);
+        reservasService.crearReserva(personas,alojamiento, fechahorario, idProducto, idSession);
 
         if (reservasService.objetoAgencia(idSession) != null) {
             Agencia agencia = reservasService.objetoAgencia(idSession);
             emailService.enviarCorreo(agencia.getEmail(), "Confirmación de reserva realizada", "Usted ha realizado una reserva para el dia "
-                    + fechahorario + " a las 13 hs para " + personas + " personas."
+                    + fechahorario + " a partir de las "+ producto.getHorario()+", para " + personas + " personas."
                     + "/n La reserva es para la excursion " + producto.getTitulo() + " con un valor de: $" + producto.getPrecio());
         } else {
             Usuario usuario = reservasService.objetoUsuario(idSession);
             emailService.enviarCorreo(usuario.getEmail(), "Confirmación de reserva realizada", "Usted ha realizado una reserva para el dia "
-                    + fechahorario + " a las 13 hs para " + personas + " personas."
+                    + fechahorario + "a partir de las "+ producto.getHorario()+", para " +personas + " personas."
                     + "/n La reserva es para la excursion " + producto.getTitulo() + " con un valor de: $" + producto.getPrecio());
         }
 
@@ -108,8 +108,8 @@ public class ReservasController {
     }
 
     @PostMapping("/modificar")
-    public RedirectView modificar(@RequestParam String id, @RequestParam Integer personas, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechahorario) {
-        reservasService.modificarReserva(id, personas, fechahorario);
+    public RedirectView modificar(@RequestParam String id, @RequestParam Integer personas,@RequestParam String alojamiento, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechahorario) {
+        reservasService.modificarReserva(id, personas,alojamiento,fechahorario);
         return new RedirectView("/reservas");
     }
 

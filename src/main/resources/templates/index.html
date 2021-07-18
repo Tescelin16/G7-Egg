@@ -80,7 +80,7 @@
                     lugar. ¿Donde quiere ir? Podemos ayudarlos en encontrar la forma de
                     hacerlo posible.
                 </p>
-                <a href="" id="texto1" type="button" class="btn btn-outline-light botonsito">Más información...</a>
+                <a th:href="@{/index#conocemas}" id="texto1" type="button" class="btn btn-outline-light botonsito">Más información...</a>
             </div>
         </div>
         <div id="item2" class="d-flex justify-content-center">
@@ -91,7 +91,7 @@
                     Mendoza podrá vivirlo, City Tours, Caminos del Vino, Alta Montaña,
                     Cañon del Atuel, Villavicencio, Cordon del Plata.
                 </p>
-                <a href="" id="texto2" type="button" class="btn btn-outline-light botonsito">Todas las excursiones</a>
+                <a th:href="@{/Producto}" id="texto2" type="button" class="btn btn-outline-light botonsito">Todas las excursiones</a>
             </div>
         </div>
     </div>
@@ -138,8 +138,13 @@
                         <article class="card h-100">
                             <div class="card-body">
                                 <div class="d-flex mb-3">
+<<<<<<< HEAD
                                     <img th:src="@{/img/Franco.jpg}" width="70px" height="70px" alt="foto del perfil"
                                         class="border border-secondary border-4 rounded-circle">
+=======
+                                    <img th:src="@{/img/foto-perfil.jpg}" width="70px" height="70px"
+                                        alt="foto del perfil" class="border border-secondary border-4 rounded-circle">
+>>>>>>> origin/main
                                     <div class="ps-3">
                                         <h4 class="m-1">Franco Trintinaglia</h4>
                                         <h5 class="m-1">Artista plastico-Programador</h5>
@@ -159,8 +164,13 @@
                         <article class="card h-100 bg-warning">
                             <div class="card-body">
                                 <div class="d-flex mb-3">
+<<<<<<< HEAD
                                     <img th:src="@{/img/Dani.jpg}" width="70px" height="70px" alt="foto del perfil"
                                         class="border border-secondary border-4 rounded-circle">
+=======
+                                    <img th:src="@{/img/foto-perfil.jpg}" width="70px" height="70px"
+                                        alt="foto del perfil" class="border border-secondary border-4 rounded-circle">
+>>>>>>> origin/main
                                     <div class="ps-3">
                                         <h4 class="m-1">Daniel Cocco</h4>
                                         <h5 class="m-1">Experto excursionista-Programador</h5>
@@ -180,8 +190,13 @@
                         <article class="card h-100 bg-primary">
                             <div class="card-body">
                                 <div class="d-flex mb-3">
+<<<<<<< HEAD
                                     <img th:src="@{/img/Gaston.jpg}" width="70px" height="70px" alt="foto del perfil"
                                         class="border border-secondary border-4 rounded-circle">
+=======
+                                    <img th:src="@{/img/foto-perfil.jpg}" width="70px" height="70px"
+                                        alt="foto del perfil" class="border border-secondary border-4 rounded-circle">
+>>>>>>> origin/main
                                     <div class="ps-3">
                                         <h4 class="m-1">Gaston Avila</h4>
                                         <h5 class="m-1">Estudiante de ingenieria en sistemas-Programador</h5>
@@ -201,8 +216,13 @@
                         <article class="card h-100 bg-danger">
                             <div class="card-body">
                                 <div class="d-flex mb-3">
+<<<<<<< HEAD
                                     <img th:src="@{/img/Pipo.jpeg}" width="70px" height="70px" alt="foto del perfil"
                                         class="border border-secondary border-4 rounded-circle">
+=======
+                                    <img th:src="@{/img/foto-perfil.jpg}" width="70px" height="70px"
+                                        alt="foto del perfil" class="border border-secondary border-4 rounded-circle">
+>>>>>>> origin/main
                                     <div class="ps-3">
                                         <h4 class="m-1">Agustin Leyes</h4>
                                         <h5 class="m-1">Fotografo-Programador</h5>
@@ -243,6 +263,19 @@
             </div>
         </div>
     </main>
+    <div class="container">
+        <h2 id="conocemas" style="text-align:center; margin-bottom: 20px;">
+            Conocé más...
+        </h2>
+        <img th:src="@{/img/conocemas.jpg}" class="rounded float-end" alt="mendoza" style="height:250px; width: 400px; margin-left: 30px;">
+        <p style="margin-bottom: 80px; font-size: large; font-family: 'JetBrains Mono', monospace; font-weight: 700;">
+            Mendoza es una ciudad de la región de Cuyo en Argentina y es el corazón de la zona vitivinícola argentina, famosa por sus Malbecs y otros vinos tintos. 
+            Sus distintas bodegas ofrecen degustaciones y visitas guiadas. 
+            La ciudad tiene calles amplias y frondosas rodeadas de edificios modernos y art déco, y con plazas más pequeñas que rodean la Plaza Independencia, sitio del Museo Municipal de Arte Moderno subterráneo, que exhibe arte moderno y contemporáneo.
+        </p>
+        
+        <hr>
+    </div>
 
     <footer th:replace="fragments :: footer"></footer>
     <script src="/static/js/buscar.js"></script>

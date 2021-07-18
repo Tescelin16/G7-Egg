@@ -30,9 +30,10 @@ public class ReservasService {
     private UsuarioRepository usuarioRepository;
 
     @Transactional
-    public void crearReserva(Integer personas, Date fechahorario, String idProducto, String idSession) {
+    public void crearReserva(Integer personas, String alojamiento, Date fechahorario, String idProducto, String idSession) {
         Reserva rva = new Reserva();
         rva.setPersonas(personas);
+        rva.setAlojamiento(alojamiento);
         rva.setFechayhorario(fechahorario);
         rva.setProducto(productoRepository.getById(idProducto));
         if (agenciaRepository.findById(idSession).isPresent()) {
@@ -47,8 +48,8 @@ public class ReservasService {
     }
 
     @Transactional
-    public void modificarReserva(String id, Integer personas, Date fechahorario) {
-        reservaRepository.modificar(id, personas, fechahorario);
+    public void modificarReserva(String id, Integer personas,String alojamiento, Date fechahorario) {
+        reservaRepository.modificar(id, personas, alojamiento, fechahorario);
     }
 
     @Transactional(readOnly = true)

@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Error 403 - Acceso Denegado</title>
     <link rel="stylesheet" th:href="@{/css/styleerror.css}"/>
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <!--<link rel="stylesheet" th:href="@{/css/style.css}"/>-->
   </head>
 
   <body>
-    <header th:replace="fragments :: header"></header>
 
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +61,7 @@
     <h1>No tienes permitido ingresar aqui!</h1>
     <h2>
       Ve a
-      <a target="_blank" th:href="@{/index}"
+      <a th:href="@{/index}"
         >Home!</a
       >
     </h2>
