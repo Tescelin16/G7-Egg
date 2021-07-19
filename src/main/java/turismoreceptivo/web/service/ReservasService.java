@@ -30,12 +30,12 @@ public class ReservasService {
     private UsuarioRepository usuarioRepository;
 
     @Transactional
-    public void crearReserva(Integer personas, String alojamiento, Date fechahorario, String idProducto, String idSession) {
+    public void crearReserva(Integer personas, String alojamiento, Date fechahorario, Producto producto, String idSession) {
         Reserva rva = new Reserva();
         rva.setPersonas(personas);
         rva.setAlojamiento(alojamiento);
         rva.setFechayhorario(fechahorario);
-        rva.setProducto(productoRepository.getById(idProducto));
+        rva.setProducto(producto);
         if (agenciaRepository.findById(idSession).isPresent()) {
             Agencia agencia = agenciaRepository.findById(idSession).get();
             rva.setAgencia(agencia);

@@ -88,10 +88,10 @@ public class ReservasController {
 
     @PostMapping("/guardar")
     public RedirectView guardar(@RequestParam Integer personas,@RequestParam String alojamiento, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechahorario,
-            @RequestParam String idProducto, HttpSession session) {
+            @RequestParam Producto producto, HttpSession session) {
         String idSession = (String) session.getAttribute("id");
-        Producto producto = reservasService.objetoProducto(idProducto);
-        reservasService.crearReserva(personas,alojamiento, fechahorario, idProducto, idSession);
+        
+        reservasService.crearReserva(personas,alojamiento, fechahorario, producto, idSession);
 
         if (reservasService.objetoAgencia(idSession) != null) {
             Agencia agencia = reservasService.objetoAgencia(idSession);
@@ -117,6 +117,6 @@ public class ReservasController {
     @PostMapping("/eliminar/{id}")
     public RedirectView eliminar(@PathVariable String id) throws ErrorService {
         reservasService.eliminarReserva(id);
-        return new RedirectView("/reservas");
+        return new RedirectView("/reservas/reservasPropia");
     }
 }
