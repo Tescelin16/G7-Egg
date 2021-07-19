@@ -1,5 +1,6 @@
 package turismoreceptivo.web.controller;
 
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import turismoreceptivo.web.entity.Agencia;
 import turismoreceptivo.web.service.AgenciaService;
+import turismoreceptivo.web.service.ReservasService;
 import turismoreceptivo.web.service.RolService;
 
 @Controller
@@ -22,6 +24,8 @@ public class AgenciaController {
 
     @Autowired
     private RolService rolService;
+	@Autowired
+	private ReservasService reservaService;
 
     @GetMapping("/login-agencia")
     public ModelAndView iniciarSesion(@RequestParam(required = false) String error) {
@@ -62,7 +66,7 @@ public class AgenciaController {
         agenciaService.crear(legajo, nombre, telefono, direccion, email, clave);
         return new RedirectView("/index");
     }
-
+	
     @GetMapping("/editar/{legajo}")
     public ModelAndView editar(@PathVariable String legajo) {
         ModelAndView mav = new ModelAndView("registro-agencia");
