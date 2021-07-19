@@ -97,7 +97,7 @@ public class UsuarioController {
             attributes.addFlashAttribute("error", e.getMessage());
         }
 
-        return new RedirectView("/usuarios");
+        return new RedirectView("/index");
     }
 
     @GetMapping("login-usuario")

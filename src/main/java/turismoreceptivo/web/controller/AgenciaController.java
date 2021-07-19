@@ -88,7 +88,7 @@ public class AgenciaController {
     @PostMapping("/eliminar/{legajo}")
     public RedirectView eliminar(@PathVariable String legajo) {
         agenciaService.eliminar(legajo);
-        return new RedirectView("/agencia");
+        return new RedirectView("/index");
     }
 
 }

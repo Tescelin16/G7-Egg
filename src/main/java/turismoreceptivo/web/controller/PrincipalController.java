@@ -24,7 +24,7 @@ public class PrincipalController {
 
     @GetMapping("/error-403")
     public ModelAndView error() {
-        return new ModelAndView("error");
+        return new ModelAndView("error-403");
     }
 
 	@GetMapping("ver-perfil")
@@ -34,11 +34,11 @@ public class PrincipalController {
 		if (reservaService.objetoAgencia(idSession) != null) {
             Agencia agencia = reservaService.objetoAgencia(idSession);
 			mav = new ModelAndView("ver-perfil-agencia");
-            mav.addObject("reservas", agencia);
+            mav.addObject("agencia", agencia);
         } else {
             Usuario usuario = reservaService.objetoUsuario(idSession);
 			mav = new ModelAndView("ver-perfil-usuario");
-            mav.addObject("reservas", usuario);
+            mav.addObject("usuario", usuario);
         }
         return mav;
 	}
