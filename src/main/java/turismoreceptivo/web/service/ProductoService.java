@@ -45,7 +45,7 @@ public class ProductoService {
         }
 
         if (horario == null || horario.isEmpty()) {
-            throw new ErrorService("La ubicacioón no puede estar vacio");
+            throw new ErrorService("El horario no puede estar vacio");
         }
 
         if (dias == null || dias.isEmpty()) {
